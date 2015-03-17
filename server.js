@@ -18,6 +18,6 @@ app.use(function(err, req, res, next){
 });
 
 app.listen(app.get('port'), function() {
-    console.log("express is running");
+    console.log("express is running on URL http://localhost:"+app.get('port')+"/");
 });
 
