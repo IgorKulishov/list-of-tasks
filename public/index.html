@@ -1,10 +1,141 @@
-<html>
-  <head>
-    <title>TODO List 0.2</title>
-  </head>
-  <body>
-    <h2>TODO List</h2>
-    sample change
-  </body>
+<!DOCTYPE html>
+<html ng-app="listTask">
+
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, 
+↵initial-scale=1">
+
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <script src="js/angular.min.js">
+  </script>
+  <script src="js/script.js"></script>
+  <title>JIRA PS-57</title>
 </head>
 
+<body ng-controller="ListController as listCtrl"> 
+
+	  <form ng-submit="listCtrl.save()">
+	    <nav class="navbar navbar-default">
+	    <div class="container-fluid">
+	    <div class="navbar-header">
+	            <h3>List of tasks:</h3>
+        </div>
+        </div>
+        </nav>
+            <div class="row">
+                <div class="col-md-1 col1">
+                    <h3>#</h3>
+                </div>
+
+                <div class="col-md-2 col2">
+                    <h3>Task</h3>
+                </div>
+                
+                <div class="col-md-1 col3">
+                    <h3>Priority</h3>
+                </div>
+
+                <div class="col-md-1 col4">
+                    <h3>Type</h3>
+                </div>
+
+                <div class="col-md-1 col4">
+                	<h3>Status</h3>
+                </div>
+            </div>
+
+            <div class="row" ng-repeat="data in listCtrl.array">
+                <div class="col-md-1 col1">
+                    <h4>{{data.number}}</h4></br>
+                </div>
+
+                <div class="col-md-2 col2">
+                    <h5>{{data.name}}</h5></br>
+                </div>
+                
+                <div class="col-md-1 col3">
+                    <div ng-if="data.priority == 1">
+                        <img src="image/small_star.png">
+                    </div>
+
+                    <div ng-if="data.priority == 2">
+                        <img src="image/small_star_2.png">
+                    </div>
+
+                    <div ng-if="data.priority == 3">
+                        <img src="image/small_star_3.png">
+                    </div> 
+
+                    <div ng-if="data.priority == 4">
+                        <img src="image/small_star_4.png">
+                    </div> 
+
+                    <div ng-if="data.priority == 5">
+                        <img src="image/small_star_5.png">
+                    </div> 
+                </div>
+
+                <div class="col-md-1 col4">
+                    <h5>{{data.type}}</h5></br>
+                </div>
+
+	            <div ng-controller="StatusController as StatCtrl">
+                <div class="col-md-2 col5">
+			        <input type="checkbox"
+                    ng-model="StatCtrl.status"
+                    ng-true-value="true"
+                    ng-false-value="false"
+                    ng-chacked="true"
+                    ng-change="StatCtrl.status_changed()"
+                    >
+
+			        <h5> {{StatCtrl.status_info}}</h5>
+			        
+			    </div>
+			    </div>                
+			    </div>
+
+            </div>
+
+	        <nav class="navbar navbar-default">
+	        <div class="container-fluid">
+	        <div class="navbar-header">
+            <div class="row">
+                <div class="col-md-1 col1">
+                    <h4>#</h4>
+                    <h4>{{listCtrl.number}}</h4>
+                </div>
+
+                <div class="col-md-4 col2">
+                    <h4>Task</h4>
+                    <input ng-model="listCtrl.name">
+                </div>
+                
+                <div class="col-md-4 col3">
+                    <h4>Priority</h4>
+                    <input ng-model="listCtrl.priority" type="number" min="1", max="5"  size="10">                    
+                </div>
+
+                <div class="col-md-2 col4">
+                    <h4>Type</h4>
+                    <div ng-init="type = 'exercise'">
+					    <select ng-model="listCtrl.type">
+					      <option value="read&study">read&study</option>
+					      <option value="exercise">exercise</option>
+					      <option value="project">project</option>
+					    </select>
+					</div>
+                </div>
+                
+            </div>
+            </div>
+            </div>
+            </nav>
+
+            <input type="submit" value="Submit">
+        
+	  </form>
+
+  </body>
