@@ -47,12 +47,13 @@
             </div>
 
             <div class="row" ng-repeat="data in listCtrl.array">
+                
                 <div class="col-md-1 col1">
-                    <h4>{{data.number}}</h4></br>
+                    <h4>{{data.number}}</h4>
                 </div>
 
                 <div class="col-md-2 col2">
-                    <h5>{{data.name}}</h5></br>
+                    <h5>{{data.name}}</h5>
                 </div>
                 
                 <div class="col-md-1 col3">
@@ -75,19 +76,20 @@
                     <div ng-if="data.priority == 5">
                         <img src="image/small_star_5.png">
                     </div> 
+                
                 </div>
-
+                
                 <div class="col-md-1 col4">
-                    <h5>{{data.type}}</h5></br>
+                    <h5>{{data.type}}</h5>
                 </div>
-
+                
 	            <div ng-controller="StatusController as StatCtrl">
                 <div class="col-md-2 col5">
 			        <input type="checkbox"
                     ng-model="StatCtrl.status"
                     ng-true-value="true"
                     ng-false-value="false"
-                    ng-chacked="true"
+                    
                     ng-change="StatCtrl.status_changed()"
                     >
 
@@ -95,9 +97,19 @@
 			        
 			    </div>
 			    </div>                
-			    </div>
-
-            </div>
+			    
+                <div ng-controller="EditController as EditCtrl">
+                <div class="col-md-1 col6">
+                    <input type="checkbox"
+                    ng-model="EditCtrl.check" 
+					ng-true-value="true"
+					ng-false-value="false"
+					ng-change="EditCtrl.edit()"
+					>Edit
+                </div>
+                </div>
+                
+			</div>
 
 	        <nav class="navbar navbar-default">
 	        <div class="container-fluid">

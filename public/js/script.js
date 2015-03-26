@@ -25,9 +25,35 @@ angular.module('listTask', [])
         if (this.status == false) {
             this.status_info = "not started";
         }
-
-        
-
     };
- 
+})
+.controller("EditController", function(testService) {
+    this.edit = function() {
+        
+        if (this.check == true) {
+            testService.checked();
+        }
+        
+        if (this.check == false) {
+            testService.unchecked();
+        }
+    };
+})
+.factory("testService", function() {
+    
+        return {
+            checked : function() {
+                alert('checked');
+            },
+            unchecked : function() {
+                alert('unchecked');
+            },
+        
+        }
+
+            /*,
+          unchecked: function() {
+                alert('unchecked');
+            }
+        }   */
 });
