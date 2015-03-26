@@ -1,5 +1,5 @@
 angular.module('listTask', [])
-.controller("ListController", function() {
+.controller("ListController", function(addressJson) {
     this.array = [];
     this.number = 1;
     this.name = "New task..";
@@ -11,6 +11,7 @@ angular.module('listTask', [])
     this.save = function() {
         
         this.array.push({number: this.number, name: this.name, priority: this.priority, type: this.type, status: this.status});
+        addressJson.data = this.array;
         this.number += 1;
     };
 
@@ -39,11 +40,11 @@ angular.module('listTask', [])
         }
     };
 })
-.factory("testService", function() {
+.factory("testService", function(addressJson) {
     
         return {
             checked : function() {
-                alert('checked');
+                alert('checked: ' + addressJson.data[1].number);
             },
             unchecked : function() {
                 alert('unchecked');
@@ -56,4 +57,7 @@ angular.module('listTask', [])
                 alert('unchecked');
             }
         }   */
+})
+.factory("addressJson", function() {
+    return data = [];
 });
