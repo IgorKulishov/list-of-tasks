@@ -5,26 +5,26 @@ angular.module('listTask', [])
     this.name = "New task..";
     this.priority = 1;
     this.type = "read&study";
-    this.status;
-    this.status_print = "not started";
+    this.progress;
+    this.progress_print = "not started";
     
     this.save = function() {
         
-        this.array.push({number: this.number, name: this.name, priority: this.priority, type: this.type, status: this.status});
+        this.array.push({number: this.number, name: this.name, priority: this.priority, type: this.type, progress: this.progress});
         addressJson.data = this.array;
         this.number += 1;
     };
 
 })
-.controller("StatusController", function() {
-    this.status_info = "not started";
-    this.status_changed = function() {
-        if (this.status == true) {
-            this.status_info = "started";
+.controller("ProgressController", function() {
+    this.progress_info = "not started";
+    this.progress_changed = function() {
+        if (this.progress == true) {
+            this.progress_info = "started";
         } 
 
-        if (this.status == false) {
-            this.status_info = "not started";
+        if (this.progress == false) {
+            this.progress_info = "not started";
         }
     };
 })
@@ -44,19 +44,23 @@ angular.module('listTask', [])
     
         return {
             checked : function() {
-                alert('checked: ' + addressJson.data[1].number);
+                var message;
+                for (var i = 0; i < addressJson.data.length; i++) {
+//need to pass 
+                    if (addressJson.data[i].progress != true) {
+                        message = 'progress of ' + alert('checked: ' + addressJson.data[i].name + ' was changed');
+                    
+                        alert('checked: ' + message);
+                    }
+                }
+
+                
             },
             unchecked : function() {
                 alert('unchecked');
             },
         
         }
-
-            /*,
-          unchecked: function() {
-                alert('unchecked');
-            }
-        }   */
 })
 .factory("addressJson", function() {
     return data = [];

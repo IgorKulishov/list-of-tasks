@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="col-md-1 col4">
-                	<h3>Status</h3>
+                	<h3>Progress</h3>
                 </div>
             </div>
 
@@ -83,17 +83,17 @@
                     <h5>{{data.type}}</h5>
                 </div>
                 
-	            <div ng-controller="StatusController as StatCtrl">
+	            <div ng-controller="ProgressController as ProgCtrl">
                 <div class="col-md-2 col5">
 			        <input type="checkbox"
-                    ng-model="StatCtrl.status"
+                    ng-model="ProgCtrl.progress"
                     ng-true-value="true"
                     ng-false-value="false"
                     
-                    ng-change="StatCtrl.status_changed()"
+                    ng-change="ProgCtrl.progress_changed()"
                     >
 
-			        <h5> {{StatCtrl.status_info}}</h5>
+			        <h5> {{ProgCtrl.progress_info}}</h5>
 			        
 			    </div>
 			    </div>                
