@@ -8,7 +8,6 @@ angular.module('listTask', [])
     this.progress = false;
     this.message = "  Click to start the task ";
     
-    
 //to add new Task
     this.save = function() {
         
@@ -43,7 +42,6 @@ angular.module('listTask', [])
             addressJson.backup[(this.number - 1)].message = "  Click to start the task " + this.number;
             n += 1;
         }             
-
             
         if (n == 4) {
             n = 0;
