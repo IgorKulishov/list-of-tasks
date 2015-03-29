@@ -42,14 +42,14 @@
                 </div>
 
                 <div class="col-md-1 col4">
-                	<h3>Status</h3>
+                	<h3>Progress</h3>
                 </div>
             </div>
 
             <div class="row" ng-repeat="data in listCtrl.array">
                 
-                <div class="col-md-1 col1">
-                    <h4>{{data.number}}</h4>
+                <div class="col-md-1 col1" ng-click="listCtrl.click()">
+                    <h4>{{$index + 1}}</h4>
                 </div>
 
                 <div class="col-md-2 col2">
@@ -83,32 +83,18 @@
                     <h5>{{data.type}}</h5>
                 </div>
                 
-	            <div ng-controller="StatusController as StatCtrl">
+	            <div ng-controller="infoProgress as progressInfo">
                 <div class="col-md-2 col5">
 			        <input type="checkbox"
-                    ng-model="StatCtrl.status"
+                    ng-model="progressInfo.progress"
                     ng-true-value="true"
-                    ng-false-value="false"
-                    
-                    ng-change="StatCtrl.status_changed()"
-                    >
-
-			        <h5> {{StatCtrl.status_info}}</h5>
-			        
+                    ng-false-value="false"                    
+                    ng-change="progressInfo.click()"
+                    >{{data.message}}
+                    <div ng-hide="true">{{progressInfo.number = $index+1}}</div>
+	            </div>
 			    </div>
-			    </div>                
-			    
-                <div ng-controller="EditController as EditCtrl">
-                <div class="col-md-1 col6">
-                    <input type="checkbox"
-                    ng-model="EditCtrl.check" 
-					ng-true-value="true"
-					ng-false-value="false"
-					ng-change="EditCtrl.edit()"
-					>Edit
-                </div>
-                </div>
-                
+			                                 
 			</div>
 
 	        <nav class="navbar navbar-default">
