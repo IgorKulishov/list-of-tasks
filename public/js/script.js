@@ -8,6 +8,7 @@ angular.module('listOfTasks', [])
         this.progress = false;
         this.progressMessage = "  Click to start the task ";        
         this.numDelete;
+        this.numEdit;
 //function to add new Task 
         this.submit = function() {            
             this.array.push({
@@ -18,8 +19,12 @@ angular.module('listOfTasks', [])
             this.number += 1;
         };
 //to delete a task from the list
-        this.delete = function() {
+        /*this.delete = function() {
             this.array.splice(this.numDelete, 1);
+        };
+*/
+        this.delete = function() {
+            this.array[this.numEdit].progressMessage = "The button is not functioning yet";
         };        
     })
 //to indicate Progress in a Task when clicked [v] button in user's menu to change Progress of a Task

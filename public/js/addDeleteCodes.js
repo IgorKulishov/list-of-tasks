@@ -8,7 +8,8 @@ angular.module('listOfTasks', [])
         this.progress = false;
         this.progressMessage = "  Click to start the task ";        
         this.numDelete;
-//function to add new Task
+        this.numEdit;
+//function to add new Task 
         this.submit = function() {            
             this.array.push({
                 number: this.number, name: this.name, priority: this.priority, 
@@ -20,6 +21,10 @@ angular.module('listOfTasks', [])
 //to delete a task from the list
         this.delete = function() {
             this.array.splice(this.numDelete, 1);
+        };
+
+        this.edit = function() {
+            this.array[this.numEdit].progressMessage = "The button is not functioning yet";
         };        
     })
 //to indicate Progress in a Task when clicked [v] button in user's menu to change Progress of a Task
@@ -46,7 +51,7 @@ angular.module('listOfTasks', [])
             if (n === 4) {
                 n = 0;
             }          
-        };
+        }; 
     })
 //factory keeps a copy of JSON and is used in the controller "infoProgress" to change Progress in array when [v] clicked in user menu 
     .factory("addressJson", function() {

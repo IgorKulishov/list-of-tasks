@@ -9,7 +9,7 @@
 	    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	    <script src="js/angular.min.js"></script>
 	    <script src="js/addDeleteCodes.js"></script>
-	    <title>JIRA PS-57</title>
+	    <title>List of tasks</title>
     </head>
 
     <body ng-controller="addAndReadTasks as addReadTaskCntrl"> 
@@ -91,9 +91,14 @@
 	                    </div>
 		            </div>
 				</div>
-				<div>
+				<div class="col-md-1 col6">
 				    <button type="button" class="btn" ng-click="addReadTaskCntrl.delete(addReadTaskCntrl.numDelete = $index)">Delete</button>	
 				</div>
+				<!--This function is not ready-->
+				<div>
+				    <button type="button" class="btn" ng-click="addReadTaskCntrl.edit(addReadTaskCntrl.numEdit = $index)">Edit</button>	
+				</div>
+				<!------------------------------>
 		    </div>
 		    <nav class="navbar navbar-default">
 		        <div class="container-fluid">
@@ -103,32 +108,42 @@
 	                            <h4>#</h4>
 	                            <h4>{{addReadTaskCntrl.number}}</h4>
 	                        </div>
-	                        <div class="col-md-4 col2">
+	                        <div class="col-md-5 col2">
 	                            <h4>Task</h4>
 	                    <!-- Enter three character minimum	 -->
 	                            <input ng-model="addReadTaskCntrl.name"  placeholder="Enter new task" >
 	                        </div>                
-	                        <div class="col-md-4 col3">
+	                        
+	                        <div class="col-md-3 col3">
 	                            <h4>Priority</h4>
-	                            <input ng-model="addReadTaskCntrl.priority" type="number" min="1", max="5"  size="10">           
-	                        </div>
-	                        <div class="col-md-2 col4">
-	                            <h4>Type</h4>
+	                            
 	                            <div ng-init="type = 'exercise'">
-						            <select ng-model="addReadTaskCntrl.type">
+						            <select ng-model="addReadTaskCntrl.priority">
+						                <option value="1">1</option>
+						                <option value="2">2</option>
+						                <option value="3">3</option>
+						                <option value="4">4</option>
+						                <option value="5">5</option>
+			 			            </select>
+			   			        </div>
+		                    </div>
+
+		                    <div class="col-md-2 col4">
+		                        <h4>Type</h4>
+		                        <div ng-init="type = 'exercise2'">
+							        <select ng-model="addReadTaskCntrl.type">
 						                <option value="boolean">boolean</option>
 
 						                <option value="percentage">percentage</option>
 						                <option value="numerical">numerical</option>
 						                <option value="task list">task list</option>
-			 			            </select>
-			   			        </div>
-	                        </div>                
+				 			            </select>
+				   			    </div>
+	                        </div>                                 
 	                    </div>
-	                </div>
 	            </div>
 	        </nav>
-	        <input type="submit" value="Submit">        
+	        <input type="submit" value="Add" class="col-md-2 col2">
 	    </form>
     </body>
 </html>
