@@ -8,7 +8,7 @@ angular.module('listOfTasks', [])
         this.progress = false;
         this.progressMessage = "  Click to start the task ";        
         this.numDelete;
-//function to add new Task
+//function to add new Task 
         this.submit = function() {            
             this.array.push({
                 number: this.number, name: this.name, priority: this.priority, 
@@ -46,7 +46,7 @@ angular.module('listOfTasks', [])
             if (n === 4) {
                 n = 0;
             }          
-        };
+        }; 
     })
 //factory keeps a copy of JSON and is used in the controller "infoProgress" to change Progress in array when [v] clicked in user menu 
     .factory("addressJson", function() {
