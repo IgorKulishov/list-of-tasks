@@ -17,7 +17,7 @@ angular.module('listOfTasks', [])
             addressJson.backup = this.array;
             this.number += 1;
         };
-
+//to delete a task from the list
         this.delete = function() {
             this.array.splice(this.numDelete, 1);
         };        
