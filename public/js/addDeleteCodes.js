@@ -22,9 +22,9 @@ angular.module('listOfTasks', [])
         this.delete = function() {
             this.array.splice(this.numDelete, 1);
         };
-
+//this function is not done (button edit does not work yet)
         this.edit = function() {
-            this.array[this.numEdit].progressMessage = "The button is not functioning yet";
+            this.array[this.numEdit].progressMessage = "Edited..";
         };        
     })
 //to indicate Progress in a Task when clicked [v] button in user's menu to change Progress of a Task
