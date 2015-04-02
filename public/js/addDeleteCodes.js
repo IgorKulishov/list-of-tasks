@@ -11,6 +11,7 @@ angular.module('listOfTasks', [])
         this.numEdit;
         this.numSave;
         this.editCommand = -1;
+        this.editedName;
 //function to add new Task 
         this.submit = function() {            
             this.array.push({
@@ -36,6 +37,7 @@ angular.module('listOfTasks', [])
             this.editCommand = 1;
             this.array[this.numSave].progressMessage = " Saved..";
             this.array[this.numSave].editCommand = -1;
+            this.array[this.numSave].name = this.editedName;
         };     
     })
 //to indicate Progress in a Task when clicked [v] button in user's menu to change Progress of a Task

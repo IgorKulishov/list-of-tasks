@@ -58,7 +58,7 @@
 		            </div>
 
 		            <div ng-if="propertyOfaTask.editCommand != -1">
-		                <input ng-model="propertyOfaTask.name"></input>
+		                <input ng-model="addReadTaskCntrl.editedName"></input>
 		            </div>
 
 	            </div>                
@@ -112,7 +112,6 @@
 				<div class="col-md-1 col8">
 				    <button type="button" class="btn" ng-click="addReadTaskCntrl.save(addReadTaskCntrl.numSave = $index)">Save</button>	
 				</div>
-
 				<!------------------------------>
 		    </div>
 		    <nav class="navbar navbar-default">
