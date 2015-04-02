@@ -10,10 +10,11 @@ angular.module('listOfTasks', [])
         this.numDelete;
         this.numEdit;
         this.numSave;
-        this.editCommand = -1;
-        this.editedName;
+        this.editCommand;
+        
 //function to add new Task 
         this.submit = function() {            
+            this.editCommand = -1;
             this.array.push({
                 number: this.number, name: this.name, priority: this.priority, 
                 type: this.type, progress: this.progress, progressMessage: this.progressMessage,
@@ -35,6 +36,7 @@ angular.module('listOfTasks', [])
 //this function is to Save an edited Task
         this.save = function() {
             this.editCommand = 1;
+            
             this.array[this.numSave].progressMessage = " Saved..";
             this.array[this.numSave].editCommand = -1;
             this.array[this.numSave].name = this.editedName;
