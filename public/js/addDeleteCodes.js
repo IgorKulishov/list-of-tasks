@@ -2,19 +2,20 @@ angular.module('listOfTasks', [])
     .controller("addAndReadTasks", function(addressJson) {
         this.array = [];
         this.number = 1;
-        this.name = "";   
         this.priority = 1;
         this.type = "boolean";
         this.progress = false;
         this.progressMessage = "  Click to start the task ";        
         this.numDelete;
-        this.numEdit;
         this.numSave;
         this.editCommand;
         
 //function to add new Task 
         this.submit = function() {            
             this.editCommand = -1;
+            if (this.name == null) {
+                this.name = "";   
+            }
             this.array.push({
                 number: this.number, name: this.name, priority: this.priority, 
                 type: this.type, progress: this.progress, progressMessage: this.progressMessage,
@@ -22,6 +23,7 @@ angular.module('listOfTasks', [])
             });
             addressJson.backup = this.array;
             this.number += 1;
+            delete this.name;
         };
 //to delete a task from the list
         this.delete = function() {
@@ -29,17 +31,17 @@ angular.module('listOfTasks', [])
         };
 //this function is to edit Tasks
         this.edit = function() {
-            this.editCommand = 1;
             this.array[this.numEdit].progressMessage = " Edited..";
-            this.array[this.numEdit].editCommand = this.numEdit;
+            this.array[this.numEdit].editCommand = 1;            
         };  
 //this function is to Save an edited Task
         this.save = function() {
-            this.editCommand = 1;
-            
-            this.array[this.numSave].progressMessage = " Saved..";
-            this.array[this.numSave].editCommand = -1;
-            this.array[this.numSave].name = this.editedName;
+            if (this.array[this.numSave].editCommand === 1) {
+                this.array[this.numSave].progressMessage = " Saved..";
+                this.array[this.numSave].editCommand = -1;
+            } else {
+                alert("Please click 'Edit' button first");
+            }
         };     
     })
 //to indicate Progress in a Task when clicked [v] button in user's menu to change Progress of a Task
