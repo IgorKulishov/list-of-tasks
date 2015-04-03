@@ -39,6 +39,7 @@ angular.module('listOfTasks', [])
             if (this.array[this.numSave].editCommand === 1) {
                 this.array[this.numSave].progressMessage = " Saved..";
                 this.array[this.numSave].editCommand = -1;
+                alert("name: " + this.array[this.numSave].name + " priority: " + this.array[this.numSave].priority);
             } else {
                 alert("Please click 'Edit' button first");
             }

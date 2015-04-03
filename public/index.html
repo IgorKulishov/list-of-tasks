@@ -64,26 +64,39 @@
 	            </div>                
 	            
 	            <!--uplpoad stars matching to priorities-->
-	            <div class="col-md-1 col3">
-	                <div ng-if="propertyOfaTask.priority == 1">
-	                    <img src="image/small_star.png">
+		        <div class="col-md-1 col3">
+		            <div ng-if="propertyOfaTask.editCommand == -1">
+		                <div ng-if="propertyOfaTask.priority == 1">
+		                    <img src="image/small_star.png">
+		                </div>
+		                
+		                <div ng-if="propertyOfaTask.priority == 2">
+		                    <img src="image/small_star_2.png">
+		                </div>
+		                
+		                <div ng-if="propertyOfaTask.priority == 3">
+		                    <img src="image/small_star_3.png">
+		                </div>
+		                
+		                <div ng-if="propertyOfaTask.priority == 4">
+		                   <img src="image/small_star_4.png">
+		                </div>
+		                
+		                <div ng-if="propertyOfaTask.priority == 5">
+		                    <img src="image/small_star_5.png">
+		                </div>                
 	                </div>
-	                
-	                <div ng-if="propertyOfaTask.priority == 2">
-	                    <img src="image/small_star_2.png">
+                    <div ng-if="propertyOfaTask.editCommand == 1">    
+                        <div ng-init="type = 'exercise'">
+				            <select ng-model="propertyOfaTask.priority">
+				                <option value="1">1</option>
+				                <option value="2">2</option>
+				                <option value="3">3</option>
+				                <option value="4">4</option>
+				                <option value="5">5</option>
+	 			            </select>
+			   			</div>	                    	
 	                </div>
-	                
-	                <div ng-if="propertyOfaTask.priority == 3">
-	                    <img src="image/small_star_3.png">
-	                </div>
-	                
-	                <div ng-if="propertyOfaTask.priority == 4">
-	                   <img src="image/small_star_4.png">
-	                </div>
-	                
-	                <div ng-if="propertyOfaTask.priority == 5">
-	                    <img src="image/small_star_5.png">
-	                </div>                
 	            </div>                
 	            <div class="col-md-1 col4">
 	                <h5>{{propertyOfaTask.type}}</h5>
