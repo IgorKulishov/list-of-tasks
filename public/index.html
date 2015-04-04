@@ -63,8 +63,9 @@
 
 	            </div>                
 	            
-	            <!--uplpoad stars matching to priorities-->
+	            <!--show images of stars amount matching to number os priority -->
 		        <div class="col-md-1 col3">
+		        <!--if 'editCommand' == -1 show the following layout-->
 		            <div ng-if="propertyOfaTask.editCommand == -1">
 		                <div ng-if="propertyOfaTask.priority == 1">
 		                    <img src="image/small_star.png">
@@ -86,8 +87,9 @@
 		                    <img src="image/small_star_5.png">
 		                </div>                
 	                </div>
-                    <div ng-if="propertyOfaTask.editCommand == 1">    
-                        <div ng-init="type = 'exercise'">
+	                <!--if 'editCommand' == 1 show select layout to Edit-->
+                    <div ng-if="propertyOfaTask.editCommand == 1"> 
+                        <div ng-init="type">
 				            <select ng-model="propertyOfaTask.priority">
 				                <option value="1">1</option>
 				                <option value="2">2</option>
@@ -97,10 +99,27 @@
 	 			            </select>
 			   			</div>	                    	
 	                </div>
-	            </div>                
+	            </div>          
+	            <!--print out 'Type's of each Task from array from controller-->
 	            <div class="col-md-1 col4">
-	                <h5>{{propertyOfaTask.type}}</h5>
-	            </div>                
+                 <!--if "propertyOfaTask.editCommand == -1" just read data from Aray-->
+		            <div ng-if="propertyOfaTask.editCommand == -1">
+		                <h5>{{propertyOfaTask.type}}</h5>
+		            </div>
+		        <!--if "propertyOfaTask.editCommand == 1" just Edit data in the Task and save in Aray-->
+		            <div ng-if="propertyOfaTask.editCommand == 1">
+                        <div ng-init="type = 'exercise2'">
+					        <select ng-model="propertyOfaTask.type">
+				                <option value="boolean">boolean</option>
+
+				                <option value="percentage">percentage</option>
+				                <option value="numerical">numerical</option>
+				                <option value="task list">task list</option>
+		 			            </select>
+		                 </div>
+		            </div>		            
+	            </div>  
+
 		        <div ng-controller="infoProgress as progressInfo">
 	                <div class="col-md-2 col5">
 				        <input type="checkbox"
@@ -144,7 +163,7 @@
 	                        <div class="col-md-3 col3">
 	                            <h4>Priority</h4>
 	                            
-	                            <div ng-init="type = 'exercise'">
+	                            <div ng-init="type">
 						            <select ng-model="addReadTaskCntrl.priority">
 						                <option value="1">1</option>
 						                <option value="2">2</option>
