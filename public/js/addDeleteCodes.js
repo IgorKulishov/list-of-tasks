@@ -1,5 +1,5 @@
 angular.module('listOfTasks', [])
-    .controller("addAndReadTasks", function(addressJson) {
+    .controller("addAndReadTasks", [function(addressJson) {
         this.array = [];
         this.number = 1;
         this.priority = 1;
@@ -44,9 +44,9 @@ angular.module('listOfTasks', [])
                 alert("Please click 'Edit' button first");
             }
         };     
-    })
+    }])
 //to indicate Progress in a Task when clicked [v] button in user's menu to change Progress of a Task
-    .controller("infoProgress", function(addressJson) {
+    .controller("infoProgress", [function(addressJson) {
         var n = 0;
         this.number = 0;
         this.click = function() {
@@ -70,7 +70,7 @@ angular.module('listOfTasks', [])
                 n = 0;
             }          
         }; 
-    })
+    }])
 //factory keeps a copy of JSON and is used in the controller "infoProgress" to change Progress in array when [v] clicked in user menu 
     .factory("addressJson", function() {
         return backup = [];
