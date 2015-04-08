@@ -120,16 +120,15 @@
 		            </div>		            
 	            </div>  
 
-		        <div ng-controller="infoProgress as progressInfo">
+		        <div>
 	                <div class="col-md-2 col5">
 				        <input type="checkbox"
-	                        ng-model="progressInfo.progress"
+	                        ng-model="propertyOfaTask.progress"
 	                        ng-true-value="true"
 	                        ng-false-value="false"                 
-	                        ng-change="progressInfo.click()"
+	                        ng-change="addReadTaskCntrl.click(addReadTaskCntrl.changeNumber = $index+1)"
 	                    >{{propertyOfaTask.progressMessage}}
-	                    <div ng-hide="true">{{progressInfo.number = $index+1}}
-	                    </div>
+	                    
 		            </div>
 				</div>
 				<div class="col-md-1 col6">

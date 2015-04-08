@@ -4,7 +4,7 @@ angular.module('listOfTasks', [])
         this.number = 1;
         this.priority = 1;
         this.type = "boolean";
-        this.progress = false;
+
         this.progressMessage = "  Click to start the task ";        
         this.numDelete;
         this.numSave;
@@ -18,8 +18,8 @@ angular.module('listOfTasks', [])
             }
             this.taskListArray.push({
                 number: this.number, name: this.name, priority: this.priority, 
-                type: this.type, progress: this.progress, progressMessage: this.progressMessage,
-                editCommand: this.editCommand
+                type: this.type, progress: false, progressMessage: this.progressMessage,
+                editCommand: this.editCommand, numberOfCheckMarks: 0
             });
             addressJson.copyTaskListArray = this.taskListArray;
             this.number += 1;
@@ -44,31 +44,37 @@ angular.module('listOfTasks', [])
                 alert("Please click 'Edit' button first");
             }
         };     
-    })
+    
 //to indicate Progress in a Task when clicked [v] button in user's menu to change Progress of a Task
-    .controller("infoProgress", function(addressJson) {
-        var n = 0;
-        this.number = 0;
-        this.click = function() {
-            if ((this.progress === true) && (n === 0)) { 
-                addressJson.copyTaskListArray[(this.number - 1)].progressMessage = "  started " + this.number;
-                n += 1;
+            
+        this.click = function() {       
+
+            
+            if (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 0) { 
+                this.taskListArray[(this.changeNumber - 1)].progressMessage = "  started " + this.changeNumber;
+                this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 1;
+                //this.taskListArray[(this.changeNumber - 1)].progress = true;
             }
-            if ((this.progress === false) && (n === 1)) { 
-                addressJson.copyTaskListArray[(this.number - 1)].progressMessage = "  postponed " + this.number;
-                n += 1; 
-            }
+
+            if (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 1)  { 
+                this.taskListArray[(this.changeNumber - 1)].progressMessage = "  postponed " + this.changeNumber;
+                this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 2; 
+                //this.taskListArray[(this.changeNumber - 1)].progress = false;
+            } 
+/*
             if ((this.progress === true) && (n === 2)) { 
                 addressJson.copyTaskListArray[(this.number - 1)].progressMessage = "  closed " + this.number;
                 n += 1;
             }
+
             if ((this.progress === false) && (n===3)) { 
                 addressJson.copyTaskListArray[(this.number - 1)].progressMessage = "  Click to start the task " + this.number;
                 n += 1;
-            }                
+            }
+
             if (n === 4) {
                 n = 0;
-            }          
+            } */
         }; 
     })
 //factory keeps a copy of JSON and is used in the controller "infoProgress" to change Progress in taskListArray when [v] clicked in user menu 
