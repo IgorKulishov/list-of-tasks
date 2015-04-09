@@ -4,8 +4,10 @@ angular.module('listOfTasks', [])
         this.number = 0;
         this.priority = 1;
         this.type = "boolean";
+        //'progress' only for boolean type;
         this.progress;
-        this.progressMessage = "  Click to start the task ";        
+        this.booleanMessage = " ";     
+        this.percentageMessage = 0;     
         this.numDelete;
         this.numSave;
         
@@ -20,8 +22,8 @@ angular.module('listOfTasks', [])
             }
             this.taskListArray.push({
                 number: ++this.number, name: this.name, priority: this.priority, 
-                type: this.type, progress: false, progressMessage: this.progressMessage,
-                editCommand: this.editCommand, numberOfCheckMarks: 0
+                type: this.type, progress: false, booleanMessage: this.booleanMessage,
+                percentageMessage: this.percentageMessage, editCommand: this.editCommand, numberOfCheckMarks: 0
             });
             addressJson.copyTaskListArray = this.taskListArray;
             
@@ -40,45 +42,47 @@ angular.module('listOfTasks', [])
         };
 //this function is to edit Tasks
         this.edit = function() {
-            this.taskListArray[this.numEdit].progressMessage = " Edited..";
             this.taskListArray[this.numEdit].editCommand = 1;            
         };  
 //this function is to Save an edited Task
         this.save = function() {
-            if (this.taskListArray[this.numSave].editCommand === 1) {
-                this.taskListArray[this.numSave].progressMessage = " Saved..";
-                this.taskListArray[this.numSave].editCommand = -1;
+            if ((this.taskListArray[this.numSave].editCommand === 1) && 
+            (this.taskListArray[this.numSave].type === 'boolean')) {
+                    this.taskListArray[this.numSave].editCommand = -1;
                 
+            } else if ((this.taskListArray[this.numSave].editCommand === 1) && 
+                (this.taskListArray[this.numSave].type === 'percentage')) {
+                    this.taskListArray[this.numSave].percentageMessage = this.percentage;
+                    this.taskListArray[this.numSave].editCommand = -1;
             } else {
                 alert("Please click 'Edit' button first");
             }
         };     
     
-//to indicate Progress in a Task when clicked [v] button in user's menu to change Progress of a Task
+//to indicate Progress of a Boolean in a Task when clicked [v] button in user's menu to change Progress of a Task
             
         this.click = function() {       
                 
             if ((this.taskListArray[(this.changeNumber - 1)].progress === true) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 0)) { 
-                this.taskListArray[(this.changeNumber - 1)].progressMessage = "  started ";
+                this.taskListArray[(this.changeNumber - 1)].booleanMessage = "  started ";
                 this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 1;
-             //   this.taskListArray[(this.changeNumber - 1)].progress = true;
-                
+                           
             }
 
             if ((this.taskListArray[(this.changeNumber - 1)].progress === false) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 1))  { 
-                this.taskListArray[(this.changeNumber - 1)].progressMessage = "  postponed ";
+                this.taskListArray[(this.changeNumber - 1)].booleanMessage = "  postponed ";
                 this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 2; 
               
               //  this.taskListArray[(this.changeNumber - 1)].progress = false;
             } 
 
             if ((this.taskListArray[(this.changeNumber - 1)].progress === true) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 2)) { 
-                 this.taskListArray[(this.changeNumber - 1)].progressMessage = "  closed ";
+                 this.taskListArray[(this.changeNumber - 1)].booleanMessage = "  closed ";
                  this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 3;
             }
 
             if ((this.taskListArray[(this.changeNumber - 1)].progress === false) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 3)) { 
-                this.taskListArray[(this.changeNumber - 1)].progressMessage = "  Click to start the task ";
+                this.taskListArray[(this.changeNumber - 1)].booleanMessage = "  Click to start the task ";
                 this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 0;
             }
            

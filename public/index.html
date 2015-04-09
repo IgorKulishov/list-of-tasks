@@ -113,24 +113,34 @@
 				                <option value="boolean">boolean</option>
 
 				                <option value="percentage">percentage</option>
-				                <option value="numerical">numerical</option>
-				                <option value="task list">task list</option>
+				            <!--    <option value="numerical">numerical</option>
+				                <option value="task list">task list</option> -->
 		 			            </select>
 		                 </div>
 		            </div>		            
 	            </div>  
 
 		        <div>
-	                <div class="col-md-2 col5">
+	                <div class="col-md-2 col5" ng-if="propertyOfaTask.type==='boolean'">
 				        <input type="checkbox"
 	                        ng-model="propertyOfaTask.progress"
 	                        ng-true-value="true"
 	                        ng-false-value="false"                 
 	                        ng-change="addReadTaskCntrl.click(addReadTaskCntrl.changeNumber = $index+1)"
-	                    >{{propertyOfaTask.progressMessage}}
+	                    >{{propertyOfaTask.booleanMessage}}
 	                    
+	                </div>
+
+  	                <div class="col-md-2 col5" ng-if="propertyOfaTask.type==='percentage' && propertyOfaTask.editCommand === 1">
+				        <input type="number" max="100" ng-model='addReadTaskCntrl.percentage'>
+	                </div>
+
+ 	                <div class="col-md-2 col5" ng-if="propertyOfaTask.type==='percentage' && propertyOfaTask.editCommand === -1">
+				        <h5>{{propertyOfaTask.percentageMessage}}%</h5>
 		            </div>
+
 				</div>
+
 				<div class="col-md-1 col6">
 				    <button type="button" class="btn" ng-click="addReadTaskCntrl.delete(addReadTaskCntrl.numDelete=propertyOfaTask.number)">Delete</button>	
 				</div>
@@ -180,9 +190,9 @@
 						                <option value="boolean">boolean</option>
 
 						                <option value="percentage">percentage</option>
-						                <option value="numerical">numerical</option>
-						                <option value="task list">task list</option>
-				 			            </select>
+						        <!--        <option value="numerical">numerical</option>
+						                <option value="task list">task list</option> -->
+				 			            </select> 
 				   			    </div>
 	                        </div>                  
 	                    </div>
