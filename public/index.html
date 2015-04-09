@@ -123,7 +123,7 @@
 		        <div>
 	                <div class="col-md-2 col5" ng-if="propertyOfaTask.type==='boolean'">
 				        <input type="checkbox"
-	                        ng-model="propertyOfaTask.progress"
+	                        ng-model="propertyOfaTask.booleanProgress"
 	                        ng-true-value="true"
 	                        ng-false-value="false"                 
 	                        ng-change="addReadTaskCntrl.click(addReadTaskCntrl.changeNumber = $index+1)"
@@ -132,7 +132,7 @@
 	                </div>
 
   	                <div class="col-md-2 col5" ng-if="propertyOfaTask.type==='percentage' && propertyOfaTask.editCommand === 1">
-				        <input type="number" max="100" ng-model='addReadTaskCntrl.percentage'>
+				        <input type="number" min="0" max="100" ng-model='addReadTaskCntrl.percentage'>
 	                </div>
 
  	                <div class="col-md-2 col5" ng-if="propertyOfaTask.type==='percentage' && propertyOfaTask.editCommand === -1">

@@ -4,8 +4,8 @@ angular.module('listOfTasks', [])
         this.number = 0;
         this.priority = 1;
         this.type = "boolean";
-        //'progress' only for boolean type;
-        this.progress;
+        //'booleanProgress' only for boolean type;
+        this.booleanProgress;
         this.booleanMessage = " ";     
         this.percentageMessage = 0;     
         this.numDelete;
@@ -22,7 +22,7 @@ angular.module('listOfTasks', [])
             }
             this.taskListArray.push({
                 number: ++this.number, name: this.name, priority: this.priority, 
-                type: this.type, progress: false, booleanMessage: this.booleanMessage,
+                type: this.type, booleanProgress: false, booleanMessage: this.booleanMessage,
                 percentageMessage: this.percentageMessage, editCommand: this.editCommand, numberOfCheckMarks: 0
             });
             addressJson.copyTaskListArray = this.taskListArray;
@@ -63,25 +63,25 @@ angular.module('listOfTasks', [])
             
         this.click = function() {       
                 
-            if ((this.taskListArray[(this.changeNumber - 1)].progress === true) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 0)) { 
+            if ((this.taskListArray[(this.changeNumber - 1)].booleanProgress === true) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 0)) { 
                 this.taskListArray[(this.changeNumber - 1)].booleanMessage = "  started ";
                 this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 1;
                            
             }
 
-            if ((this.taskListArray[(this.changeNumber - 1)].progress === false) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 1))  { 
+            if ((this.taskListArray[(this.changeNumber - 1)].booleanProgress === false) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 1))  { 
                 this.taskListArray[(this.changeNumber - 1)].booleanMessage = "  postponed ";
                 this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 2; 
               
               //  this.taskListArray[(this.changeNumber - 1)].progress = false;
             } 
 
-            if ((this.taskListArray[(this.changeNumber - 1)].progress === true) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 2)) { 
+            if ((this.taskListArray[(this.changeNumber - 1)].booleanProgress === true) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 2)) { 
                  this.taskListArray[(this.changeNumber - 1)].booleanMessage = "  closed ";
                  this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 3;
             }
 
-            if ((this.taskListArray[(this.changeNumber - 1)].progress === false) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 3)) { 
+            if ((this.taskListArray[(this.changeNumber - 1)].booleanProgress === false) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 3)) { 
                 this.taskListArray[(this.changeNumber - 1)].booleanMessage = "  Click to start the task ";
                 this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 0;
             }
