@@ -1,33 +1,37 @@
 angular.module('listOfTasks', [])
     .controller("addAndReadTasks", function(addressJson) {
         this.taskListArray = [];
-        this.number = 1;
+        this.number = 0;
         this.priority = 1;
         this.type = "boolean";
         this.progress;
         this.progressMessage = "  Click to start the task ";        
         this.numDelete;
         this.numSave;
+        
         this.editCommand;
         
 //function to add new Task 
         this.submit = function() {            
+            
             this.editCommand = -1;
             if (this.name == null) {
                 this.name = "";   
             }
             this.taskListArray.push({
-                number: this.number, name: this.name, priority: this.priority, 
+                number: ++this.number, name: this.name, priority: this.priority, 
                 type: this.type, progress: false, progressMessage: this.progressMessage,
                 editCommand: this.editCommand, numberOfCheckMarks: 0
             });
             addressJson.copyTaskListArray = this.taskListArray;
-            this.number += 1;
+            
             delete this.name;
+            
         };
 //to delete a task from the list
         this.delete = function() {
-            this.taskListArray.splice(this.numDelete, 1);
+           alert(this.numDelete);
+           this.taskListArray.splice((this.numDelete-1), 1);
         };
 //this function is to edit Tasks
         this.edit = function() {
