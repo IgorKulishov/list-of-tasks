@@ -28,10 +28,15 @@ angular.module('listOfTasks', [])
             delete this.name;
             
         };
-//to delete a task from the list
+//to delete a task from the list 
+  // (HOW IT WORKS: HTML sends to 'this.delete' function 'numDelete' which is equel to 'this.number' which is a unique number of an element in array (given at creation). Looping through 'this.taskListArray' array we will find the position of the number we need to delete.)
+
         this.delete = function() {
-           alert(this.numDelete);
-           this.taskListArray.splice((this.numDelete-1), 1);
+           //alert(this.numDelete); 
+           for (var i = 0; i < this.taskListArray.length; i++)
+                if (this.taskListArray[i].number === this.numDelete) {
+                    this.taskListArray.splice((i), 1);
+            }
         };
 //this function is to edit Tasks
         this.edit = function() {
@@ -53,7 +58,6 @@ angular.module('listOfTasks', [])
             
         this.click = function() {       
                 
-            
             if ((this.taskListArray[(this.changeNumber - 1)].progress === true) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 0)) { 
                 this.taskListArray[(this.changeNumber - 1)].progressMessage = "  started ";
                 this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 1;
