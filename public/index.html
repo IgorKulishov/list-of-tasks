@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="listOfTasks">
-    
+<html ng-app="listOfTasks">    
     <head>
 	    <meta charset="utf-8">
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +10,6 @@
 	    <script src="js/addDeleteCodes.js"></script>
 	    <title>List of tasks</title>
     </head>
-
     <body ng-controller="addAndReadTasks as addReadTaskCntrl"> 
 		<form ng-submit="addReadTaskCntrl.submit()">
 		    <nav class="navbar navbar-default">
@@ -46,7 +44,7 @@
 	        </div>
 	        <div class="row" ng-repeat="propertyOfaTask in addReadTaskCntrl.taskListArray">   
 	            
-	            <div class="col-md-1 col1" ng-click="addReadTaskCntrl.click()">
+	            <div class="col-md-1 col1" ng-click="addReadTaskCntrl.booleanCheck()">
 	                <h4>{{$index + 1}}</h4>
 	            </div>
 	            
@@ -115,7 +113,7 @@
 				                <option value="percentage">percentage</option>
 				            <!--    <option value="numerical">numerical</option>
 				                <option value="task list">task list</option> -->
-		 			            </select>
+		 			        </select>
 		                 </div>
 		            </div>		            
 	            </div>  
@@ -126,7 +124,7 @@
 	                        ng-model="propertyOfaTask.booleanProgress"
 	                        ng-true-value="true"
 	                        ng-false-value="false"                 
-	                        ng-change="addReadTaskCntrl.click(addReadTaskCntrl.changeNumber = $index+1)"
+	                        ng-change="addReadTaskCntrl.booleanCheck(addReadTaskCntrl.changeNumber = $index+1)"
 	                    >{{propertyOfaTask.booleanMessage}}
 	                    
 	                </div>
@@ -200,6 +198,7 @@
 	                    <div>
 	                       	<h5>* ID is unique Task number</h5>
 	                    </div>
+	                </div>
 	            </div>
 	        </nav>
 	        <input type="submit" value="Add" class="col-md-2 col2">
