@@ -1,5 +1,5 @@
 angular.module('listOfTasks', [])
-    .controller("addAndReadTasks", [function(addressJson) {
+    .controller("addAndReadTasks", [function() {
         this.taskListArray = [];
         this.number = 0;
         this.priority = 1;
@@ -9,28 +9,30 @@ angular.module('listOfTasks', [])
         this.booleanMessage = " ";     
         this.percentageMessage = 0;     
         this.numDelete;
-        this.numSave;
-        
+        this.numSave;        
         this.editCommand;
         
-//function to add new Task 
+        //function to add new Task 
         this.submit = function() {            
-            
+
             this.editCommand = -1;
             if (this.name == null) {
                 this.name = "";   
             }
-            this.taskListArray.push({
+            //presentation object
+            this.todoRecord = {
                 number: ++this.number, name: this.name, priority: this.priority, 
                 type: this.type, booleanProgress: false, booleanMessage: this.booleanMessage,
                 percentageMessage: this.percentageMessage, editCommand: this.editCommand, numberOfCheckMarks: 0
-            });
-            addressJson.copyTaskListArray = this.taskListArray;            
+            };            
+
+            this.taskListArray.push(this.todoRecord);
+            
             delete this.name;            
         };
-//to delete a task from the list 
-  // (HOW IT WORKS: HTML sends to 'this.delete' function 'numDelete' which is equel to 'this.number' which is a unique number of an element in array (given at creation). Looping through 'this.taskListArray' array we will find the position of the number we need to delete.)
-
+      
+        //to delete a task from the list 
+        // (HOW IT WORKS: HTML sends to 'this.delete' function 'numDelete' which is equel to 'this.number' which is a unique number of an element in array (given at creation). Looping through 'this.taskListArray' array we will find the position of the number we need to delete.)
         this.delete = function() {
            //alert(this.numDelete); 
             for (var i = 0; i < this.taskListArray.length; i++)
@@ -79,8 +81,4 @@ angular.module('listOfTasks', [])
                 this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 0;
             }           
         }; 
-    }])
-//factory keeps a copy of JSON and is used in the controller "infoProgress" to change Progress in taskListArray when [v] clicked in user menu 
-    .factory("addressJson", [function() {
-        return copyTaskListArray = [];
     }]);
