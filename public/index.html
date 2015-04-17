@@ -11,7 +11,7 @@
 	    <title>List of tasks</title>
     </head>
     <body ng-controller="addAndReadTasks as addReadTaskCntrl"> 
-		<form ng-submit="addReadTaskCntrl.submit()">
+		<div>
 		    <nav class="navbar navbar-default">
 		        <div class="container-fluid">
 		            <div class="navbar-header">	
@@ -37,7 +37,7 @@
 	                <h3>Type</h3>
 	            </div>
 	            
-	            <div class="col-md-1 col4">
+	            <div class="col-md-1 col5">
 	              	<h3>Progress</h3>
 	            </div>
 
@@ -143,11 +143,11 @@
 				</div>
 				
 			    <!--Edit button-->
-				<div class="col-md-1 col7">
+				<div class="col-md-1 col7" ng-if="taskRecord.editCommand == -1">
 				    <button type="button" class="btn" ng-click="addReadTaskCntrl.edit(addReadTaskCntrl.numEdit = taskRecord.ID)">Edit</button>	
 				</div>
                 <!--Save button-->
-				<div class="col-md-1 col8">
+				<div class="col-md-1 col7" ng-if="taskRecord.editCommand == 1">
 				    <button type="button" class="btn" ng-click="addReadTaskCntrl.save(addReadTaskCntrl.numSave = taskRecord.ID)">Save</button>	
 				</div>
 				<!------------------------------>
@@ -189,12 +189,11 @@
 				 			            </select> 
 				   			    </div>
 	                        </div>                  
-	                    </div>
-	                   
+	                    </div>	                   
 	                </div>
 	            </div>
 	        </nav>
-	        <input type="submit" value="Add" class="col-md-2 col2">
-	    </form>
+	        <input type="button" ng-click="addReadTaskCntrl.submit()" value="Add" class="col-md-2 col2">	        
+	    </div>
     </body>
 </html>
