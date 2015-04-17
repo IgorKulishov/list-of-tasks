@@ -18,7 +18,7 @@ angular.module('listOfTasks', [])
             //presentation object
             this.todoRecord = {
                 ID: this.ID, name: this.name, priority: this.priority, 
-                type: this.type, booleanProgress: false, booleanMessage: this.booleanMessage,
+                type: this.type, booleanProgress: false, 
                 percentageMessage: this.percentageMessage, editCommand: this.editCommand, numberOfCheckMarks: 0
             };            
             this.taskListArray.push(this.todoRecord);            
@@ -59,24 +59,7 @@ angular.module('listOfTasks', [])
             
         this.booleanCheck = function() {       
                 
-            if ((this.taskListArray[(this.changeNumber - 1)].booleanProgress === true) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 0)) { 
-                this.taskListArray[(this.changeNumber - 1)].booleanMessage = "  started ";
-                this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 1;                           
-            }
-            if ((this.taskListArray[(this.changeNumber - 1)].booleanProgress === false) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 1))  { 
-                this.taskListArray[(this.changeNumber - 1)].booleanMessage = "  postponed ";
-                this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 2;               
-              //  this.taskListArray[(this.changeNumber - 1)].progress = false;
-            } 
-
-            if ((this.taskListArray[(this.changeNumber - 1)].booleanProgress === true) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 2)) { 
-                 this.taskListArray[(this.changeNumber - 1)].booleanMessage = "  closed ";
-                 this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 3;
-            }
-            if ((this.taskListArray[(this.changeNumber - 1)].booleanProgress === false) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 3)) { 
-                this.taskListArray[(this.changeNumber - 1)].booleanMessage = "  Click to start the task ";
-                this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 0;
-            }
+       //can save info about check mark from UIcha if needed;
                    
         }; 
     }]);

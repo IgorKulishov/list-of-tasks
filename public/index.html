@@ -44,7 +44,7 @@
 	        </div>
 	        <div class="row" ng-repeat="taskRecord in addReadTaskCntrl.taskListArray">   
 	            
-	            <div class="col-md-1 col1" ng-click="addReadTaskCntrl.booleanCheck()">
+	            <div class="col-md-1 col1">
 	                <h4>{{$index + 1}}</h4>
 	            </div>
 	            
@@ -124,8 +124,8 @@
 	                        ng-model="taskRecord.booleanProgress"
 	                        ng-true-value="true"
 	                        ng-false-value="false"                 
-	                        ng-change="addReadTaskCntrl.booleanCheck(addReadTaskCntrl.changeNumber = $index+1)"
-	                    >{{taskRecord.booleanMessage}}
+	                        ng-change="addReadTaskCntrl.booleanCheck()"
+	                    >
 	                    
 	                </div>
 
