@@ -1,58 +1,55 @@
 angular.module('listOfTasks', [])
     .controller("addAndReadTasks", [function() {
-        this.taskListArray = [];
-        this.number = 0;
+        this.taskListArray = [];        
         this.priority = 1;
         this.type = "boolean";
         //'booleanProgress' only for boolean type;
         this.booleanProgress;
         this.booleanMessage = " ";     
-        this.percentageMessage = 0;     
-        this.numDelete;
-        this.numSave;        
-        this.editCommand;
+        this.percentageMessage = 0;             
         
         //function to add new Task 
         this.submit = function() {            
-
             this.editCommand = -1;
-            if (this.name == null) {
+            if (this.name === null) {
                 this.name = "";   
             }
+            this.ID = this.taskListArray.length + 1;
             //presentation object
             this.todoRecord = {
-                number: ++this.number, name: this.name, priority: this.priority, 
+                ID: this.ID, name: this.name, priority: this.priority, 
                 type: this.type, booleanProgress: false, booleanMessage: this.booleanMessage,
                 percentageMessage: this.percentageMessage, editCommand: this.editCommand, numberOfCheckMarks: 0
             };            
-
-            this.taskListArray.push(this.todoRecord);
-            
+            this.taskListArray.push(this.todoRecord);            
             delete this.name;            
         };
       
         //to delete a task from the list 
-        // (HOW IT WORKS: HTML sends to 'this.delete' function 'numDelete' which is equel to 'this.number' which is a unique number of an element in array (given at creation). Looping through 'this.taskListArray' array we will find the position of the number we need to delete.)
-        this.delete = function() {
-           //alert(this.numDelete); 
-            for (var i = 0; i < this.taskListArray.length; i++)
-                if (this.taskListArray[i].number === this.numDelete) {
-                    this.taskListArray.splice((i), 1);
-            }
+        // (HOW IT WORKS: HTML sends to 'this.delete' function 'numDelete' which is equel to 'this.ID' which is a unique number of an element in array (given at creation). Looping through 'this.taskListArray' array we will find the position of the ID we need to delete.)
+        this.delete = function() {        
+            this.taskListArray.splice((this.numDelete - 1), 1);
+            
+        // rearange ID numbers after deletetion (reassign new IDs)
+            var n = this.taskListArray.length;
+            for (var j = 0; j < n; j++) {
+                this.taskListArray[j].ID = j + 1;             
+            }          
         };
 //this function is to edit Tasks
         this.edit = function() {
-            this.taskListArray[this.numEdit].editCommand = 1;            
+            this.taskListArray[this.numEdit-1].editCommand = 1;            
         };  
 //this function is to Save an edited Task
         this.save = function() {
-            if ((this.taskListArray[this.numSave].editCommand === 1) && 
-            (this.taskListArray[this.numSave].type === 'boolean')) {
-                this.taskListArray[this.numSave].editCommand = -1;                
-            } else if ((this.taskListArray[this.numSave].editCommand === 1) && 
-            (this.taskListArray[this.numSave].type === 'percentage')) {
-                this.taskListArray[this.numSave].percentageMessage = this.percentage;
-                this.taskListArray[this.numSave].editCommand = -1;
+            if ((this.taskListArray[this.numSave-1].editCommand === 1) && 
+            (this.taskListArray[this.numSave-1].type === 'boolean')) {
+                this.taskListArray[this.numSave-1].editCommand = -1;                
+            
+            } else if ((this.taskListArray[this.numSave-1].editCommand === 1) && 
+            (this.taskListArray[this.numSave-1].type === 'percentage')) {
+                this.taskListArray[this.numSave-1].percentageMessage = this.percentage;
+                this.taskListArray[this.numSave-1].editCommand = -1;
             } else {
                 alert("Please click 'Edit' button first");
             }
@@ -79,6 +76,7 @@ angular.module('listOfTasks', [])
             if ((this.taskListArray[(this.changeNumber - 1)].booleanProgress === false) && (this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks === 3)) { 
                 this.taskListArray[(this.changeNumber - 1)].booleanMessage = "  Click to start the task ";
                 this.taskListArray[(this.changeNumber - 1)].numberOfCheckMarks = 0;
-            }           
+            }
+                   
         }; 
     }]);
