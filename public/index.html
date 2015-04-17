@@ -61,7 +61,7 @@
 
 	            </div>                
 	            
-	            <!--show images of stars amount matching to number os priority -->
+	            <!--show images of stars amount matching to number of priority -->
 		        <div class="col-md-1 col3">
 		        <!--if 'editCommand' == -1 show the following layout-->
 		            <div ng-if="taskRecord.editCommand == -1">
@@ -85,7 +85,7 @@
 		                    <img src="image/small_star_5.png">
 		                </div>                
 	                </div>
-	                <!--if 'editCommand' == 1 show select layout to Edit-->
+	                <!--if 'editCommand' == 1 show select layout -->
                     <div ng-if="taskRecord.editCommand == 1"> 
                         <div ng-init="type">
 				            <select ng-model="taskRecord.priority">
@@ -116,7 +116,7 @@
 		 			        </select>
 		                 </div>
 		            </div>		            
-	            </div>  
+	            </div> 
 
 		        <div>
 	                <div class="col-md-2 col5" ng-if="taskRecord.type==='boolean'">
@@ -125,10 +125,9 @@
 	                        ng-true-value="true"
 	                        ng-false-value="false"                 
 	                        ng-change="addReadTaskCntrl.booleanCheck()"
-	                    >
-	                    
+	                    >	                    
 	                </div>
-
+	                <!--enter input of percentage-->
   	                <div class="col-md-2 col5" ng-if="taskRecord.type==='percentage' && taskRecord.editCommand === 1">
 				        <input type="number" min="0" max="100" ng-model='addReadTaskCntrl.percentage'>
 	                </div>
@@ -138,16 +137,16 @@
 		            </div>
 
 				</div>
-
+				<!--DELETE button-->
 				<div class="col-md-1 col6">
 				    <button type="button" class="btn" ng-click="addReadTaskCntrl.delete(addReadTaskCntrl.numDelete=taskRecord.ID)">Delete</button>	
 				</div>
-				<!--This function is not ready-->
-			<!--Edit button-->
+				
+			    <!--Edit button-->
 				<div class="col-md-1 col7">
 				    <button type="button" class="btn" ng-click="addReadTaskCntrl.edit(addReadTaskCntrl.numEdit = taskRecord.ID)">Edit</button>	
 				</div>
-            <!--Save button-->
+                <!--Save button-->
 				<div class="col-md-1 col8">
 				    <button type="button" class="btn" ng-click="addReadTaskCntrl.save(addReadTaskCntrl.numSave = taskRecord.ID)">Save</button>	
 				</div>

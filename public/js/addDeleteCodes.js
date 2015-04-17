@@ -5,7 +5,6 @@ angular.module('listOfTasks', [])
         this.type = "boolean";
         //'booleanProgress' only for boolean type;
         this.booleanProgress;
-        this.booleanMessage = " ";     
         this.percentageMessage = 0;             
         
         //function to add new Task 
@@ -26,21 +25,21 @@ angular.module('listOfTasks', [])
         };
       
         //to delete a task from the list 
-        // (HOW IT WORKS: HTML sends to 'this.delete' function 'numDelete' which is equel to 'this.ID' which is a unique number of an element in array (given at creation). Looping through 'this.taskListArray' array we will find the position of the ID we need to delete.)
+        // HOW IT WORKS: HTML sends to 'this.delete' function 'numDelete' which is equel to 'this.ID' (the ID number of a Task in array).
         this.delete = function() {        
             this.taskListArray.splice((this.numDelete - 1), 1);
             
-        // rearange ID numbers after deletetion (reassign new IDs)
+        // rearange and reassign integer ID numbers of Tasks after deletetion a Task (IDs are in order 1,2,3.. without any gaps)
             var n = this.taskListArray.length;
             for (var j = 0; j < n; j++) {
                 this.taskListArray[j].ID = j + 1;             
             }          
         };
-//this function is to edit Tasks
+//this function is to edit a Task
         this.edit = function() {
             this.taskListArray[this.numEdit-1].editCommand = 1;            
         };  
-//this function is to Save an edited Task
+//this function is to Save edited Task
         this.save = function() {
             if ((this.taskListArray[this.numSave-1].editCommand === 1) && 
             (this.taskListArray[this.numSave-1].type === 'boolean')) {
@@ -55,11 +54,10 @@ angular.module('listOfTasks', [])
             }
         };     
     
-//to indicate Progress of a Boolean in a Task when clicked [v] button in user's menu to change Progress of a Task
-            
+//to indicate Progress of a Boolean in a Task when clicked [v] button in user's menu to change Progress of a Task            
         this.booleanCheck = function() {       
                 
-       //can save info about check mark from UIcha if needed;
+       //can save info about check mark from UI if needed;
                    
         }; 
     }]);
