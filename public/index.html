@@ -6,11 +6,11 @@
 	    <meta name="viewport" content="width=device-width, 
 	↵initial-scale=1">
 	    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	    <script src="js/vendor_codes/angular.js"></script>
+	    <script src="vendor/angular.js"></script>
 	    <script src="js/addDeleteCodes.js"></script>
 	    <title>List of tasks</title>
     </head>
-    <body ng-controller="addAndReadTasks as addReadTaskCntrl"> 
+    <body ng-controller="todoListController as ctrl">
 		<div>
 		    <nav class="navbar navbar-default">
 		        <div class="container-fluid">
@@ -42,7 +42,7 @@
 	            </div>
 
 	        </div>
-	        <div class="row" ng-repeat="taskRecord in addReadTaskCntrl.taskListArray">   
+	        <div class="row" ng-repeat="taskRecord in ctrl.taskListArray">
 	            
 	            <div class="col-md-1 col1">
 	                <h4>{{$index + 1}}</h4>
@@ -51,12 +51,12 @@
 	            <div class="col-md-2 col2">
 	            <!--list Tasks from taskListArray in JSON-->
 	            
-		            <div ng-if="taskRecord.editCommand == -1">
+		            <div ng-if="!taskRecord.isEditing">
 		                <h5>{{taskRecord.name}}</h5>
 		            </div>
 
-		            <div ng-if="taskRecord.editCommand != -1">
-		                <input ng-model="taskRecord.name"></input>
+		            <div ng-if="taskRecord.isEditing">
+		                <input ng-model="taskRecord.name"/>
 		            </div>
 
 	            </div>                
@@ -64,7 +64,7 @@
 	            <!--show images of stars amount matching to number of priority -->
 		        <div class="col-md-1 col3">
 		        <!--if 'editCommand' == -1 show the following layout-->
-		            <div ng-if="taskRecord.editCommand == -1">
+		            <div ng-if="!taskRecord.isEditing">
 		                <div ng-if="taskRecord.priority == 1">
 		                    <img src="image/small_star.png">
 		                </div>
@@ -86,7 +86,7 @@
 		                </div>                
 	                </div>
 	                <!--if 'editCommand' == 1 show select layout -->
-                    <div ng-if="taskRecord.editCommand == 1"> 
+                    <div ng-if="taskRecord.isEditing">
                         <div ng-init="type">
 				            <select ng-model="taskRecord.priority">
 				                <option value="1">1</option>
@@ -101,11 +101,11 @@
 	            <!--print out 'Type's of each Task from taskListArray from controller-->
 	            <div class="col-md-1 col4">
                  <!--if "taskRecord.editCommand == -1" just read data from Aray-->
-		            <div ng-if="taskRecord.editCommand == -1">
+		            <div ng-if="!taskRecord.isEditing">
 		                <h5>{{taskRecord.type}}</h5>
 		            </div>
 		        <!--if "taskRecord.editCommand == 1" just Edit data in the Task and save in Aray-->
-		            <div ng-if="taskRecord.editCommand == 1">
+		            <div ng-if="taskRecord.isEditing">
                         <div ng-init="type">
 					        <select ng-model="taskRecord.type">
 				                <option value="boolean">boolean</option>
@@ -124,31 +124,31 @@
 	                        ng-model="taskRecord.booleanProgress"
 	                        ng-true-value="true"
 	                        ng-false-value="false"                 
-	                        ng-change="addReadTaskCntrl.booleanCheck()"
+	                        ng-change="ctrl.booleanCheck()"
 	                    >	                    
 	                </div>
 	                <!--enter input of percentage-->
-  	                <div class="col-md-2 col5" ng-if="taskRecord.type==='percentage' && taskRecord.editCommand === 1">
-				        <input type="number" min="0" max="100" ng-model='addReadTaskCntrl.percentage'>
+  	                <div class="col-md-2 col5" ng-if="taskRecord.type==='percentage' && taskRecord.isEditing">
+				        <input type="number" min="0" max="100" ng-model='taskRecord.percentageMessage'>
 	                </div>
 
- 	                <div class="col-md-2 col5" ng-if="taskRecord.type==='percentage' && taskRecord.editCommand === -1">
+ 	                <div class="col-md-2 col5" ng-if="taskRecord.type==='percentage' && !taskRecord.isEditing">
 				        <h5>{{taskRecord.percentageMessage}}%</h5>
 		            </div>
 
 				</div>
 				<!--DELETE button-->
 				<div class="col-md-1 col6">
-				    <button type="button" class="btn" ng-click="addReadTaskCntrl.delete(addReadTaskCntrl.numDelete=taskRecord.ID)">Delete</button>	
+				    <button type="button" class="btn" ng-click="ctrl.delete(taskRecord.id)">Delete</button>
 				</div>
 				
 			    <!--Edit button-->
-				<div class="col-md-1 col7" ng-if="taskRecord.editCommand == -1">
-				    <button type="button" class="btn" ng-click="addReadTaskCntrl.edit(addReadTaskCntrl.numEdit = taskRecord.ID)">Edit</button>	
+				<div class="col-md-1 col7" ng-if="!taskRecord.isEditing">
+				    <button type="button" class="btn" ng-click="ctrl.edit(taskRecord.id)">Edit</button>
 				</div>
                 <!--Save button-->
-				<div class="col-md-1 col7" ng-if="taskRecord.editCommand == 1">
-				    <button type="button" class="btn" ng-click="addReadTaskCntrl.save(addReadTaskCntrl.numSave = taskRecord.ID)">Save</button>	
+				<div class="col-md-1 col7" ng-if="taskRecord.isEditing">
+				    <button type="button" class="btn" ng-click="ctrl.save(taskRecord.id)">Save</button>
 				</div>
 				<!------------------------------>
 		    </div>
@@ -160,14 +160,14 @@
 	                        <div class="col-md-5 col2">
 	                            <h4>Task</h4>
 	                    <!-- Enter three character minimum	 -->
-	                            <input ng-model="addReadTaskCntrl.name"  placeholder="Enter new task" >
+	                            <input ng-model="ctrl.newTask.name"  placeholder="Enter new task" >
 	                        </div>                
 	                        
 	                        <div class="col-md-3 col3">
 	                            <h4>Priority</h4>
 	                            
 	                            <div ng-init="type">
-						            <select ng-model="addReadTaskCntrl.priority">
+						            <select ng-model="ctrl.newTask.priority">
 						                <option value="1">1</option>
 						                <option value="2">2</option>
 						                <option value="3">3</option>
@@ -180,7 +180,7 @@
 		                    <div class="col-md-2 col4">
 		                        <h4>Type</h4>
 		                        <div ng-init="type">
-							        <select ng-model="addReadTaskCntrl.type">
+							        <select ng-model="ctrl.newTask.type">
 						                <option value="boolean">boolean</option>
 
 						                <option value="percentage">percentage</option>
@@ -193,7 +193,7 @@
 	                </div>
 	            </div>
 	        </nav>
-	        <input type="button" ng-click="addReadTaskCntrl.submit()" value="Add" class="col-md-2 col2">	        
+	        <input type="button" ng-click="ctrl.addTask(ctrl.newTask)" value="Add" class="col-md-2 col2">
 	    </div>
     </body>
 </html>
