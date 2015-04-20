@@ -8,7 +8,8 @@ angular.module('listOfTasks', [])
         //this.booleanProgress;
         //this.percentageMessage = 0;
         var self = this;
-        this.init = function() {
+        //the init() function can be just var
+        var init = function() {
             self.newTask = {};
             self.newTask.name = "";
             self.newTask.priority = 1;
@@ -17,14 +18,16 @@ angular.module('listOfTasks', [])
             self.percentageMessage = 0;
         }
 
-        this.init();
+        init();
 
         //function to add new Task 
         this.addTask = function(taskToAdd) {
             self.editCommand = -1;
-            if (self.name === null) {
+            //we do not need the expression
+            /*if (self.name === null) {
                 self.name = "";
-            }
+            }*/
+
             // this.ID = this.taskListArray.length + 1; // <-- you do not need ID before (business) object is created
             //presentation object
             // <-- this.newTask: presentation object
@@ -35,12 +38,14 @@ angular.module('listOfTasks', [])
                 priority: parseInt(taskToAdd.priority),
                 type: taskToAdd.type,
                 booleanProgress: false,
-                percentageMessage: 0,
+                //it work before just fine but i added the link
+                //percentageMessage: 0,
+                percentageMessage: taskToAdd.percentageMessage,
                 isEditing: false
             };
             self.taskListArray.push(todoRecord);
             // delete this.name; // <-- not a good solution
-            self.init();
+            init();
         };
 
         //to delete a task from the list 
