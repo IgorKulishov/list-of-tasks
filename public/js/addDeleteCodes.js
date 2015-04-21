@@ -15,7 +15,7 @@ angular.module('listOfTasks', [])
             self.newTask.priority = 1;
             self.newTask.type = "boolean";
             self.booleanProgress = false;
-            self.percentageMessage = 0;
+            self.newTask.percentageMessage = 0;
         }
 
         init();
