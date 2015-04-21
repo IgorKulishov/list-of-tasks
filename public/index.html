@@ -1,9 +1,187 @@
-<html>
-  <head>
-    <title>TODO List 0.2</title>
-  </head>
-  <body>
-    <h2>TODO List</h2>
-  </body>
-</head>
+<!DOCTYPE html>
+<html ng-app="listOfTasks">    
+    <head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, 
+	↵initial-scale=1">
+	    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	    <script src="vendor/angular.js"></script>
+	    <script src="js/todoListController.js"></script>
+	    <title>List of tasks</title>
+    </head>
+    <body ng-controller="todoListController as ctrl">
+		<div>
+		    <nav class="navbar navbar-default">
+		        <div class="container-fluid">
+		            <div class="navbar-header">	
+		                <h3>List of tasks:</h3>
+	                </div>
+	            </div>
+	        </nav>
+	          
+	        <div class="row">
+	            <div class="col-md-1 col1">
+	                <h3>#</h3>
+	            </div>
+	            
+	            <div class="col-md-2 col2">
+	                <h3>Task</h3>
+	            </div>                
+	            
+	            <div class="col-md-1 col3">
+	                <h3>Priority</h3>
+	            </div>
+	            
+	            <div class="col-md-1 col4">
+	                <h3>Type</h3>
+	            </div>
+	            
+	            <div class="col-md-1 col5">
+	              	<h3>Progress</h3>
+	            </div>
 
+	        </div>
+	        <div class="row" ng-repeat="taskRecord in ctrl.taskListArray">
+	            
+	            <div class="col-md-1 col1">
+	                <h4>{{$index + 1}}</h4>
+	            </div>
+	            
+	            <div class="col-md-2 col2">
+	            <!--list of Tasks from taskListArray in JSON-->
+	            
+		            <div ng-if="!taskRecord.isEditing">
+		                <h5>{{taskRecord.name}}</h5>
+		            </div>
+
+		            <div ng-if="taskRecord.isEditing">
+		                <input ng-model="taskRecord.name"/>
+		            </div>
+
+	            </div>                
+	            
+	            <!--show images of stars amount matching to number of priority -->
+		        <div class="col-md-1 col3">
+		        <!--if 'isEditing' == false show the following layout-->
+		            <div ng-if="!taskRecord.isEditing">
+		                <div ng-if="taskRecord.priority == 1">
+		                    <img src="image/small_star.png">
+		                </div>
+		                
+		                <div ng-if="taskRecord.priority == 2">
+		                    <img src="image/small_star_2.png">
+		                </div>
+		                
+		                <div ng-if="taskRecord.priority == 3">
+		                    <img src="image/small_star_3.png">
+		                </div>
+		                
+		                <div ng-if="taskRecord.priority == 4">
+		                   <img src="image/small_star_4.png">
+		                </div>
+		                
+		                <div ng-if="taskRecord.priority == 5">
+		                    <img src="image/small_star_5.png">
+		                </div>                
+	                </div>
+	                <!--if isEditing == true show select layout -->
+                    <div ng-if="taskRecord.isEditing">
+                        <div ng-init="type">
+				            <select ng-model="taskRecord.priority">
+				                <option value="1">1</option>
+				                <option value="2">2</option>
+				                <option value="3">3</option>
+				                <option value="4">4</option>
+				                <option value="5">5</option>
+	 			            </select>
+			   			</div>	                    	
+	                </div>
+	            </div>          
+	            <!--print out 'Type's of each Task from taskListArray from controller-->
+	            <div class="col-md-1 col4">
+                 <!--if "taskRecord.isEditing == false" just read data from Aray-->
+		            <div ng-if="!taskRecord.isEditing">
+		                <h5>{{taskRecord.type}}</h5>
+		            </div>
+		        <!--if "taskRecord.isEditing == true" just Edit data in the Task and save in Aray-->
+		            <div ng-if="taskRecord.isEditing">
+                        <div ng-init="type">
+					        <select ng-model="taskRecord.type">
+				                <option value="boolean">boolean</option>
+				                <option value="percentage">percentage</option>
+		 			        </select>
+		                 </div>
+		            </div>		            
+	            </div> 
+		        <div>
+	                <div class="col-md-2 col5" ng-if="taskRecord.type==='boolean'">
+				        <input type="checkbox"
+	                        ng-model="taskRecord.booleanProgress"
+	                        ng-true-value="true"
+	                        ng-false-value="false"                 
+	                        ng-change="ctrl.booleanCheck()"
+	                    >	                    
+	                </div>
+	                <!--enter input of percentage-->
+  	                <div class="col-md-2 col5" ng-if="taskRecord.type==='percentage' && taskRecord.isEditing">
+				        <input type="number" min="0" max="100" ng-model='taskRecord.percentageMessage'>
+	                </div>
+
+ 	                <div class="col-md-2 col5" ng-if="taskRecord.type==='percentage' && !taskRecord.isEditing">
+				        <h5>{{taskRecord.percentageMessage}}%</h5>
+		            </div>
+
+				</div>
+				<!--DELETE button-->
+				<div class="col-md-1 col6">
+				    <button type="button" class="btn" ng-click="ctrl.delete(taskRecord.id)">Delete</button>
+				</div>				
+			    <!--Edit button-->
+				<div class="col-md-1 col7" ng-if="!taskRecord.isEditing">
+				    <button type="button" class="btn" ng-click="ctrl.edit(taskRecord.id)">Edit</button>
+				</div>
+                <!--Save button-->
+				<div class="col-md-1 col7" ng-if="taskRecord.isEditing">
+				    <button type="button" class="btn" ng-click="ctrl.save(taskRecord.id)">Save</button>
+				</div>				
+		    </div>
+		    <nav class="navbar navbar-default">
+		        <div class="container-fluid">
+		            <div class="navbar-header">
+	                    <div class="row">
+	                        <div class="col-md-5 col2">
+	                            <h4>Task</h4>	                  
+	                            <input ng-model="ctrl.newTask.name"  placeholder="Enter new task" >
+	                        </div>       
+	                        <div class="col-md-3 col3">
+	                            <h4>Priority</h4>
+	                            
+	                            <div ng-init="type">
+						            <select ng-model="ctrl.newTask.priority">
+						                <option value="1">1</option>
+						                <option value="2">2</option>
+						                <option value="3">3</option>
+						                <option value="4">4</option>
+						                <option value="5">5</option>
+			 			            </select>
+			   			        </div>			   			      
+		                    </div>
+		                    <div class="col-md-2 col4">
+		                        <h4>Type</h4>
+		                        <div ng-init="type">
+							        <select ng-model="ctrl.newTask.type">
+						                <option value="boolean">boolean</option>
+
+						                <option value="percentage">percentage</option>
+				 			            </select> 
+				   			    </div>
+	                        </div>                  
+	                    </div>	                   
+	                </div>
+	            </div>
+	        </nav>
+	        <input type="button" ng-click="ctrl.addTask(ctrl.newTask)" value="Add" class="col-md-2 col2">
+	    </div>
+    </body>
+</html>
