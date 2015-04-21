@@ -23,7 +23,8 @@ angular.module('listOfTasks', [])
                 isEditing: false
             };
             self.taskListArray.push(todoRecord);            
-            init();        };
+            init();
+        };
         this.delete = function(id) {            
             for(var i = 0; i < self.taskListArray.length; i++) {
                 if(self.taskListArray[i].id === id) {
@@ -41,7 +42,6 @@ angular.module('listOfTasks', [])
                     break;
                 }
             }
-
         };
         //this function is to Save edited Task
         this.save = function(id) {
@@ -56,4 +56,5 @@ angular.module('listOfTasks', [])
         this.booleanCheck = function() {
         //can save info about check mark from UI if needed;
         };
-    }]);
+}]);
+
