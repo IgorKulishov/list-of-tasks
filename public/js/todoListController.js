@@ -13,9 +13,7 @@ angular.module('listOfTasks', [])
         }
         init();
         //function to add new Task 
-        this.addTask = function(taskToAdd) {
-            self.editCommand = -1;
-            
+        this.addTask = function(taskToAdd) {            
             var todoRecord = {
                 id: idGenerator++,
                 name: taskToAdd.name,

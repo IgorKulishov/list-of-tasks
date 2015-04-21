@@ -63,7 +63,7 @@
 	            
 	            <!--show images of stars amount matching to number of priority -->
 		        <div class="col-md-1 col3">
-		        <!--if 'editCommand' == -1 show the following layout-->
+		        <!--if 'isEditing' == false show the following layout-->
 		            <div ng-if="!taskRecord.isEditing">
 		                <div ng-if="taskRecord.priority == 1">
 		                    <img src="image/small_star.png">
@@ -85,7 +85,7 @@
 		                    <img src="image/small_star_5.png">
 		                </div>                
 	                </div>
-	                <!--if 'editCommand' == 1 show select layout -->
+	                <!--if isEditing == true show select layout -->
                     <div ng-if="taskRecord.isEditing">
                         <div ng-init="type">
 				            <select ng-model="taskRecord.priority">
@@ -100,11 +100,11 @@
 	            </div>          
 	            <!--print out 'Type's of each Task from taskListArray from controller-->
 	            <div class="col-md-1 col4">
-                 <!--if "taskRecord.editCommand == -1" just read data from Aray-->
+                 <!--if "taskRecord.isEditing == false" just read data from Aray-->
 		            <div ng-if="!taskRecord.isEditing">
 		                <h5>{{taskRecord.type}}</h5>
 		            </div>
-		        <!--if "taskRecord.editCommand == 1" just Edit data in the Task and save in Aray-->
+		        <!--if "taskRecord.isEditing == true" just Edit data in the Task and save in Aray-->
 		            <div ng-if="taskRecord.isEditing">
                         <div ng-init="type">
 					        <select ng-model="taskRecord.type">
