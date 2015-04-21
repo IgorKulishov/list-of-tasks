@@ -7,7 +7,7 @@
 	↵initial-scale=1">
 	    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	    <script src="vendor/angular.js"></script>
-	    <script src="js/addDeleteCodes.js"></script>
+	    <script src="js/todoListController.js"></script>
 	    <title>List of tasks</title>
     </head>
     <body ng-controller="todoListController as ctrl">
@@ -49,7 +49,7 @@
 	            </div>
 	            
 	            <div class="col-md-2 col2">
-	            <!--list Tasks from taskListArray in JSON-->
+	            <!--list of Tasks from taskListArray in JSON-->
 	            
 		            <div ng-if="!taskRecord.isEditing">
 		                <h5>{{taskRecord.name}}</h5>
@@ -109,15 +109,11 @@
                         <div ng-init="type">
 					        <select ng-model="taskRecord.type">
 				                <option value="boolean">boolean</option>
-
 				                <option value="percentage">percentage</option>
-				            <!--    <option value="numerical">numerical</option>
-				                <option value="task list">task list</option> -->
 		 			        </select>
 		                 </div>
 		            </div>		            
 	            </div> 
-
 		        <div>
 	                <div class="col-md-2 col5" ng-if="taskRecord.type==='boolean'">
 				        <input type="checkbox"
@@ -140,8 +136,7 @@
 				<!--DELETE button-->
 				<div class="col-md-1 col6">
 				    <button type="button" class="btn" ng-click="ctrl.delete(taskRecord.id)">Delete</button>
-				</div>
-				
+				</div>				
 			    <!--Edit button-->
 				<div class="col-md-1 col7" ng-if="!taskRecord.isEditing">
 				    <button type="button" class="btn" ng-click="ctrl.edit(taskRecord.id)">Edit</button>
@@ -149,20 +144,16 @@
                 <!--Save button-->
 				<div class="col-md-1 col7" ng-if="taskRecord.isEditing">
 				    <button type="button" class="btn" ng-click="ctrl.save(taskRecord.id)">Save</button>
-				</div>
-				<!------------------------------>
+				</div>				
 		    </div>
 		    <nav class="navbar navbar-default">
 		        <div class="container-fluid">
 		            <div class="navbar-header">
 	                    <div class="row">
-
 	                        <div class="col-md-5 col2">
-	                            <h4>Task</h4>
-	                    <!-- Enter three character minimum	 -->
+	                            <h4>Task</h4>	                  
 	                            <input ng-model="ctrl.newTask.name"  placeholder="Enter new task" >
-	                        </div>                
-	                        
+	                        </div>       
 	                        <div class="col-md-3 col3">
 	                            <h4>Priority</h4>
 	                            
@@ -174,10 +165,8 @@
 						                <option value="4">4</option>
 						                <option value="5">5</option>
 			 			            </select>
-			   			        </div>
-			   			      
+			   			        </div>			   			      
 		                    </div>
-
 		                    <div class="col-md-2 col4">
 		                        <h4>Type</h4>
 		                        <div ng-init="type">
@@ -185,8 +174,6 @@
 						                <option value="boolean">boolean</option>
 
 						                <option value="percentage">percentage</option>
-						        <!--        <option value="numerical">numerical</option>
-						                <option value="task list">task list</option> -->
 				 			            </select> 
 				   			    </div>
 	                        </div>                  
