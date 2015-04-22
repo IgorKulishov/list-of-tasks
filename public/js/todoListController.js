@@ -1,7 +1,8 @@
 angular.module('listOfTasks', [])
-    .controller("todoListController", [function() {
+    .controller("todoListController", function(jsonService) {
         var idGenerator = 1;
-        this.taskListArray = [];
+        //this.taskListArray = [];  <-moved array of tasks to service
+        // presentation objects stay in the controller
         var self = this;        
         var init = function() {
             self.newTask = {};
@@ -10,51 +11,67 @@ angular.module('listOfTasks', [])
             self.newTask.type = "boolean";
             self.booleanProgress = false;
             self.newTask.percentageMessage = 0;
+            self.newTask.isEditing = false;
         }
         init();
+
+        //function to read 'list' array of tasks from service
+        this.taskListArray = function() {
+            return jsonService.readList();
+        }
+
         //function to add new Task 
         this.addTask = function(taskToAdd) {            
-            var todoRecord = {
-                id: idGenerator++,
-                name: taskToAdd.name,
-                priority: parseInt(taskToAdd.priority),
-                type: taskToAdd.type,                            
-                percentageMessage: taskToAdd.percentageMessage,
-                isEditing: false
-            };
-            self.taskListArray.push(todoRecord);            
-            init();
+            jsonService.addNewTask({                
+                id: idGenerator++, name: taskToAdd.name, priority: taskToAdd.priority, 
+                type: taskToAdd.type, percentageMessage: taskToAdd.percentageMessage,
+                isEditing: taskToAdd.isEditing
+            });            
+            init();        
         };
-        this.delete = function(id) {            
-            for(var i = 0; i < self.taskListArray.length; i++) {
-                if(self.taskListArray[i].id === id) {
-                    self.taskListArray.splice(i, 1);
-                    break;
-                }
-            }
+        //function to delete a task
+        this.delete = function(id) {                    
+            return jsonService.deleteTask(id);
         };
         //this function is to edit a Task
-        this.edit = function(id) {
-            //this.taskListArray[this.numEdit-1].editCommand = 1;
-            for(var i = 0; i < self.taskListArray.length; i++) {
-                if(self.taskListArray[i].id === id) {
-                    this.taskListArray[i].isEditing = true;
-                    break;
-                }
-            }
+        this.edit = function(id) {            
+            return jsonService.editTask(id);            
         };
         //this function is to Save edited Task
         this.save = function(id) {
-            for(var i = 0; i < self.taskListArray.length; i++) {
-                if(self.taskListArray[i].id === id) {
-                    this.taskListArray[i].isEditing = false;
-                    break;
-                }
-            }
+            return jsonService.saveTask(id);
         };
         //to indicate Progress of a Boolean in a Task when clicked [v] button in user's menu to change Progress of a Task            
-        this.booleanCheck = function() {
-        //can save info about check mark from UI if needed;
+        this.booleanCheck = function(id) {
+            return jsonService.changeProgressInfo(id);
         };
-}]);
-
+})
+.factory("jsonService", function() {
+        //array of tasks in service 
+        var list = [];
+        //return array to controller and than to "todoListController" in html
+        return {readList: function() {
+                return list;                
+                }, addNewTask: function(newTask) {
+                    list.push(newTask);                    
+                }, deleteTask: function(deleteTaskNumber) {
+                    for (var i = 0; i < list.length; i++) {
+                        if (list[i].id === deleteTaskNumber)
+                            list.splice(i, 1);
+                    }
+                }, editTask: function(editTaskNumber) {
+                    for (var i = 0; i < list.length; i++) {
+                        if (list[i].id === editTaskNumber)
+                            list[i].isEditing = true; 
+                    }
+                }, saveTask: function(saveTaskNumber) {
+                    for (var i = 0; i < list.length; i++) {
+                        if (list[i].id === saveTaskNumber)
+                            list[i].isEditing = false; 
+                    }                
+                }, changeProgressInfo: function(changeTaskNumber) {
+                    //jreserved function to track clicks
+                    
+                }
+        };         
+    });
