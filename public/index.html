@@ -42,7 +42,7 @@
 	            </div>
 
 	        </div>
-	        <div class="row" ng-repeat="taskRecord in ctrl.taskListArray">
+	        <div class="row" ng-repeat="taskRecord in ctrl.taskListArray()">
 	            
 	            <div class="col-md-1 col1">
 	                <h4>{{$index + 1}}</h4>
@@ -120,7 +120,7 @@
 	                        ng-model="taskRecord.booleanProgress"
 	                        ng-true-value="true"
 	                        ng-false-value="false"                 
-	                        ng-change="ctrl.booleanCheck()"
+	                        ng-change="ctrl.booleanCheck(taskRecord.id)"
 	                    >	                    
 	                </div>
 	                <!--enter input of percentage-->
