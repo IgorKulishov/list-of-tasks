@@ -46,9 +46,12 @@ angular.module('listOfTasks', [])
             return jsonService.changeProgressInfo(id);
         };
 })
-.factory("jsonService", function() {
+.factory("jsonService", ['$http', function($http) {
         //array of tasks in service 
         var list = [];
+        $http.get('rest/todo.json').then(function(response) {
+            list = response.data;
+        });
         //return array to controller and than to "todoListController" in html
         return {readList: function() {
                 return list;                
@@ -73,5 +76,5 @@ angular.module('listOfTasks', [])
                     //jreserved function to track clicks
                     
                 }
-        };         
-    });
+        };
+}]);
