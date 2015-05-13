@@ -16,19 +16,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 })); 
 
-app.use(function(req, res){
-    res.type('text/plain');
-    res.status(404);
-    res.send('404 - Not Found');
-});
-
-app.use(function(err, req, res, next){
-    console.error(err.stack);
-    res.type('text/plain');
-    res.status(500);
-    res.send('500 - Server Error');
-});
-
 todoData = [
   {
     "id":1,
@@ -59,11 +46,25 @@ todoData = [
   }
 ];
 
-app.get('/rest/todo', function(req, res, next){
+app.get('/rest/todo', function(req, res, next) {
     //res.send([{"id":0,"name":"first task","priority":1,"type":"boolean","booleanProgress":false,"percentageMessage":0,"isEditing":false},{"id":1,"name":"test last last","priority":"2","type":"boolean","booleanProgress":false,"percentageMessage":0,"isEditing":false},{"id":1,"name":"test last last","priority":"2","type":"boolean","booleanProgress":false,"percentageMessage":0,"isEditing":false}]);
-    console.log(taskArray);
-    res.send(taskArray);           
-    next();
+    console.log(todoData);
+    res.send(todoData);           
+    
+});
+
+
+app.use(function(req, res){
+    res.type('text/plain');
+    res.status(404);
+    res.send('404 - Not Found');
+});
+
+app.use(function(err, req, res, next){
+    console.error(err.stack);
+    res.type('text/plain');
+    res.status(500);
+    res.send('500 - Server Error');
 });
 
 app.listen(app.get('port'), function() {
