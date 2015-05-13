@@ -1,0 +1,29 @@
+[
+  {
+    "id":1,
+    "name":"Task 1",
+    "priority":1,
+    "type":"boolean",
+    "booleanProgress":true,
+    "percentageMessage":0,
+    "isEditing":false
+  },
+  {
+    "id":2,
+    "name":"Task 2",
+    "priority":1,
+    "type":"boolean",
+    "booleanProgress":true,
+    "percentageMessage":0,
+    "isEditing":false
+  },
+  {
+    "id":3,
+    "name":"Task 3",
+    "priority":1,
+    "type":"boolean",
+    "booleanProgress":true,
+    "percentageMessage":0,
+    "isEditing":false
+  }
+]
