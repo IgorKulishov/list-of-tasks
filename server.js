@@ -36,7 +36,6 @@ todoData = [
 ];
 //send list of tasks to a client
 app.get('/rest/todo', function(req, res, next) {
-    //res.send([{"id":0,"name":"first task","priority":1,"type":"boolean","booleanProgress":false,"percentageMessage":0,"isEditing":false},{"id":1,"name":"test last last","priority":"2","type":"boolean","booleanProgress":false,"percentageMessage":0,"isEditing":false},{"id":1,"name":"test last last","priority":"2","type":"boolean","booleanProgress":false,"percentageMessage":0,"isEditing":false}]);
     console.log(todoData);
     res.send(todoData);        
 });
