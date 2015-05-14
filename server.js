@@ -39,6 +39,19 @@ app.get('/rest/todo', function(req, res, next) {
     console.log(todoData);
     res.send(todoData);        
 });
+//add new task from a client
+app.post('/rest/todo', function(req, res, next){    
+    var newTask = req.body;
+    for (var i = 0; i < todoData.length; i++) {
+        if (idGenerator <= todoData[i].id)
+            idGenerator = todoData[i].id;
+    }
+    newTask.id = idGenerator + 1;    
+    todoData.push(newTask);
+    console.log(todoData); 
+    res.send('new task with id: ' + newTask.id + ' recorded!')         
+    next();
+});
 //if not found
 app.use(function(req, res){
     res.type('text/plain');
