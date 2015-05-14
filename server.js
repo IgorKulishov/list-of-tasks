@@ -1,20 +1,9 @@
 var express = require('express'),
-    fs = require('fs'),
-    util = require('util'),
-    bodyParser = require('body-parser'),
-    app = express(); 
-    var idGenerator = 0;
-    var todoData;
-
+var todoData;
 var app = express();
+
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public'));
-
-app.use(bodyParser.json());
-// to support URL-encoded bodies
-app.use(bodyParser.urlencoded({     
-  extended: true
-})); 
 
 todoData = [
   {
@@ -49,21 +38,7 @@ todoData = [
 app.get('/rest/todo', function(req, res, next) {
     //res.send([{"id":0,"name":"first task","priority":1,"type":"boolean","booleanProgress":false,"percentageMessage":0,"isEditing":false},{"id":1,"name":"test last last","priority":"2","type":"boolean","booleanProgress":false,"percentageMessage":0,"isEditing":false},{"id":1,"name":"test last last","priority":"2","type":"boolean","booleanProgress":false,"percentageMessage":0,"isEditing":false}]);
     console.log(todoData);
-    res.send(todoData);           
-    
-});
-//add new task from a client
-app.post('/rest/todo', function(req, res, next){    
-    var newTask = req.body;
-    for (var i = 0; i < todoData.length; i++) {
-        if (idGenerator <= todoData[i].id)
-            idGenerator = todoData[i].id;
-    }
-    newTask.id = idGenerator + 1;    
-    todoData.push(newTask);
-    console.log(todoData); 
-    res.send('new task with id: ' + newTask.id + ' recorded!')         
-    next();
+    res.send(todoData);        
 });
 //if not found
 app.use(function(req, res){
@@ -82,4 +57,3 @@ app.use(function(err, req, res, next){
 app.listen(app.get('port'), function() {
     console.log("express is running on URL http://localhost:"+app.get('port')+"/");
 });
-
