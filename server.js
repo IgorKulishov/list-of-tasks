@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var express = require('express'),
     app = express(), 
     todoData;
@@ -7,6 +8,12 @@ app.use(express.static(__dirname + '/public'));
 
 //initial list of tasks
 todoData = [
+=======
+var express = require('express');
+var app = express();
+
+var todoData = [
+>>>>>>> 3756e709e65682f8e8e246933ed09a65a7f79dee
   {
     "id":1,
     "name":"Task 1",
@@ -35,6 +42,11 @@ todoData = [
     "isEditing":false
   }
 ];
+
+app.set('port', process.env.PORT || 3000);
+app.use(express.static(__dirname + '/public'));
+
+
 //send list of tasks to a client
 app.get('/rest/todo', function(req, res, next) {
     console.log(todoData);
@@ -59,7 +71,7 @@ app.use(function(req, res){
     res.send('404 - Not Found');
 });
 //if server error
-app.use(function(err, req, res, next){
+app.use(function(err, req, res, next) {
     console.error(err.stack);
     res.type('text/plain');
     res.status(500);
