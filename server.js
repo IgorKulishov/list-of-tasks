@@ -1,6 +1,6 @@
-var express = require('express'),
-var todoData;
+var express = require('express');
 var app = express();
+var todoData;
 
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public'));
@@ -56,3 +56,4 @@ app.use(function(err, req, res, next){
 app.listen(app.get('port'), function() {
     console.log("express is running on URL http://localhost:"+app.get('port')+"/");
 });
+
