@@ -1,5 +1,6 @@
 var express = require('express'),
-    app = express();
+    app = express(),
+    responseById;
     
 //initial list of tasks
 var todoData = [
@@ -44,11 +45,12 @@ app.get('/rest/todo', function(req, res, next) {
 app.get('/rest/todo/:id', function(req, res, next) {
     for (var i = 0; i < todoData.length; i++) {
         if (todoData[i].id === parseInt(req.params.id)) {
-            console.log(todoData[i]);
-            res.send(todoData[i]);  
-            break;            
+            responseById = todoData[i];
+            break;                    
         }
-    }                   
+    }             
+    console.log(responseById);
+    res.send(responseById);        
 });
 //if not found
 app.use(function(req, res) {
