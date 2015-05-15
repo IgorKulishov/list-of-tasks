@@ -38,8 +38,7 @@ app.use(express.static(__dirname + '/public'));
 //send list of tasks to a client
 app.get('/rest/todo', function(req, res, next) {
     console.log(todoData);
-    res.send(todoData);        
-    next();    
+    res.send(todoData);            
 });
 //respond by 'id'
 app.get('/rest/todo/:id', function(req, res, next) {
@@ -49,8 +48,7 @@ app.get('/rest/todo/:id', function(req, res, next) {
             res.send(todoData[i]);  
             break;            
         }
-    }             
-    next();   
+    }                   
 });
 //if not found
 app.use(function(req, res) {
