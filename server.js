@@ -1,12 +1,8 @@
 var express = require('express'),
-    app = express(), 
-    todoData;
-
-app.set('port', process.env.PORT || 3000);
-app.use(express.static(__dirname + '/public'));
-
+    app = express();
+    
 //initial list of tasks
-todoData = [
+var todoData = [
   {
     "id":1,
     "name":"Task 1",
@@ -35,6 +31,10 @@ todoData = [
     "isEditing":false
   }
 ];
+//path to html and assigning
+app.set('port', process.env.PORT || 3000);
+app.use(express.static(__dirname + '/public'));
+
 //send list of tasks to a client
 app.get('/rest/todo', function(req, res, next) {
     console.log(todoData);
@@ -53,13 +53,13 @@ app.get('/rest/todo/:id', function(req, res, next) {
     next();   
 });
 //if not found
-app.use(function(req, res){
+app.use(function(req, res) {
     res.type('text/plain');
     res.status(404);
     res.send('404 - Not Found');
 });
 //if server error
-app.use(function(err, req, res, next){
+app.use(function(err, req, res, next) {
     console.error(err.stack);
     res.type('text/plain');
     res.status(500);
