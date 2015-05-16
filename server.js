@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
-
+    
+//initial list of tasks
 var todoData = [
   {
     "id":1,
@@ -30,18 +31,30 @@ var todoData = [
     "isEditing":false
   }
 ];
-
+//path to html and assigning
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public'));
-
 
 //send list of tasks to a client
 app.get('/rest/todo', function(req, res, next) {
     console.log(todoData);
-    res.send(todoData);        
+    res.send(todoData);            
+});
+//respond by 'id'
+app.get('/rest/todo/:id', function(req, res, next) {
+    var responseById;
+    var parseRequestedId = parseInt(req.params.id);
+    for (var i = 0; i < todoData.length; i++) {
+        if (todoData[i].id === parseRequestedId) {
+            responseById = todoData[i];
+            break;                    
+        }
+    }             
+    console.log(responseById);
+    res.send(responseById);        
 });
 //if not found
-app.use(function(req, res){
+app.use(function(req, res) {
     res.type('text/plain');
     res.status(404);
     res.send('404 - Not Found');
@@ -57,4 +70,3 @@ app.use(function(err, req, res, next) {
 app.listen(app.get('port'), function() {
     console.log("express is running on URL http://localhost:"+app.get('port')+"/");
 });
-
