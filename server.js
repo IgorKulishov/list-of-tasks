@@ -1,5 +1,5 @@
-var express = require('express'),
-    app = express();
+var express = require('express');
+var app = express();
     
 //initial list of tasks
 var todoData = [
@@ -43,9 +43,9 @@ app.get('/rest/todo', function(req, res, next) {
 //respond by 'id'
 app.get('/rest/todo/:id', function(req, res, next) {
     var responseById;
-    var decodResponseById = parseInt(req.params.id);
+    var parseRequestedId = parseInt(req.params.id);
     for (var i = 0; i < todoData.length; i++) {
-        if (todoData[i].id === decodResponseById) {
+        if (todoData[i].id === parseRequestedId) {
             responseById = todoData[i];
             break;                    
         }
