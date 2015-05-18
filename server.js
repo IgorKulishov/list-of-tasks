@@ -48,6 +48,8 @@ app.get('/rest/todo/:id', function(req, res, next) {
         if (todoData[i].id === parseRequestedId) {
             responseById = todoData[i];
             break;                    
+        } if ((i === (todoData.length - 1)) && (todoData[i].id != parseRequestedId)) {
+            responseById = "ID # " + parseRequestedId + " does not exist in database.";  
         }
     }             
     console.log(responseById);
