@@ -43,17 +43,28 @@ app.get('/rest/todo', function(req, res, next) {
 //respond by 'id'
 app.get('/rest/todo/:id', function(req, res, next) {
     var responseById;
+    var defaultErrorMessage = {
+    "id":null,
+    "name":"there is no such task",
+    "priority":null,
+    "type":"boolean",
+    "booleanProgress":true,
+    "percentageMessage":0,
+    "isEditing":false
+  };
+    //by default responseById = defaultErrorMessage
+    responseById = defaultErrorMessage;
     var parseRequestedId = parseInt(req.params.id);
     for (var i = 0; i < todoData.length; i++) {
         if (todoData[i].id === parseRequestedId) {
             responseById = todoData[i];
+            console.log(responseById);
+            res.send(responseById);        
             break;                    
-        } if ((i === (todoData.length - 1)) && (todoData[i].id != parseRequestedId)) {
-            responseById = "ID # " + parseRequestedId + " does not exist in database.";  
-        }
-    }             
+        } 
+    }
     console.log(responseById);
-    res.send(responseById);        
+    res.send(responseById);    
 });
 //if not found
 app.use(function(req, res) {
