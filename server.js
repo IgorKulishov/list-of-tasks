@@ -1,6 +1,9 @@
 var express = require('express');
 var app = express();
-    
+var bodyParser = require('body-parser');
+
+//to assign id to new task;
+var idGenerator = null;    
 //initial list of tasks
 var todoData = [
   {
@@ -31,6 +34,9 @@ var todoData = [
     "isEditing":false
   }
 ];
+
+app.use(bodyParser.json());
+
 //path to html and assigning
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public'));
@@ -66,7 +72,9 @@ app.get('/rest/todo/:id', function(req, res, next) {
 });
 
 app.post('/rest/todo', function(req, res, next) {
-    var newTask = JSON.parse(req.body).name;
+    var newTask = req.body;    
+    idGenerator = todoData[(todoData.length - 1)].id + 1;
+    newTask.id = idGenerator;
     todoData.push(newTask);
     console.log(todoData);
     res.send(todoData);
