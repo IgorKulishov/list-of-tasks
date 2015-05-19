@@ -49,6 +49,7 @@ app.get('/rest/todo', function(req, res, next) {
 //respond by 'id'
 app.get('/rest/todo/:id', function(req, res, next) {
     var responseById;
+    //this data will be sent back if no 'id' found
     var defaultErrorMessage = {
     "id":null,
     "name":"there is no such task",
