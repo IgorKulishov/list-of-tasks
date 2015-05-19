@@ -64,6 +64,14 @@ app.get('/rest/todo/:id', function(req, res, next) {
     console.log(responseById);
     res.send(responseById);    
 });
+
+app.post('/rest/todo', function(req, res, next) {
+    var newTask = JSON.parse(req.body).name;
+    todoData.push(newTask);
+    console.log(todoData);
+    res.send(todoData);
+});
+
 //if not found
 app.use(function(req, res) {
     res.type('text/plain');
@@ -79,5 +87,5 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(app.get('port'), function() {
-    console.log("express is running on URL http://localhost:"+app.get('port')+"/");
+    console.log("express is running on URL http://localhost:" + app.get('port') + "/");
 });
