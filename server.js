@@ -52,12 +52,12 @@ app.use(bodyParser.json());
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public'));
 
-//send list of tasks to a client
+//get respond sends list of all tasks to a client
 app.get('/rest/todo', function(req, res, next) {
     console.log(todoData);
     res.send(todoData);            
 });
-//respond by 'id'
+//get respond by 'id'
 app.get('/rest/todo/:id', function(req, res, next) {
     var responseById;
     //by default responseById = defaultErrorMessage
@@ -72,7 +72,7 @@ app.get('/rest/todo/:id', function(req, res, next) {
     console.log(responseById);
     res.send(responseById);    
 });
-
+//adding a new task
 app.post('/rest/todo', function(req, res, next) {
     var newTask = req.body;    
     idGenerator = todoData[(todoData.length - 1)].id + 1;
@@ -81,7 +81,7 @@ app.post('/rest/todo', function(req, res, next) {
     console.log(todoData[(todoData.length - 1)]);
     res.send(todoData[(todoData.length - 1)]);
 });
-
+//editing existing task
 app.put('/rest/todo/:id', function(req, res, next) {
     var updateTask = req.body;
     //by default there is no such task with the 'id'
@@ -96,6 +96,16 @@ app.put('/rest/todo/:id', function(req, res, next) {
     }
     console.log(updateResponse);
     res.send(updateResponse); 
+});
+
+app.delete('/rest/todo/:id', function(req, res, next) {
+    var deleteTaskId = req.params.id;
+    for (var i = 0; i < todoData.length; i++) {
+        if (todoData[i].id === deleteTaskId)
+            todoData.splice(i, 1);
+    }
+    console.log(todoData);
+    res.send(todoData); 
 });
 
 //if not found
