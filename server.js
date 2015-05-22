@@ -12,8 +12,7 @@ var todoData = [
     "priority":1,
     "type":"boolean",
     "booleanProgress":true,
-    "percentageMessage":0,
-    "isEditing":false
+    "percentageMessage":0
   },
   {
     "id":2,
@@ -21,8 +20,7 @@ var todoData = [
     "priority":1,
     "type":"boolean",
     "booleanProgress":true,
-    "percentageMessage":0,
-    "isEditing":false
+    "percentageMessage":0
   },
   {
     "id":3,
@@ -30,8 +28,7 @@ var todoData = [
     "priority":1,
     "type":"boolean",
     "booleanProgress":true,
-    "percentageMessage":0,
-    "isEditing":false
+    "percentageMessage":0
   }
 ];
 
@@ -42,8 +39,7 @@ var todoData = [
     "priority":null,
     "type":"boolean",
     "booleanProgress":true,
-    "percentageMessage":0,
-    "isEditing":false
+    "percentageMessage":0
   };
 
 app.use(bodyParser.json());
