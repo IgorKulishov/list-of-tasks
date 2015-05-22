@@ -81,32 +81,6 @@ app.post('/rest/todo', function(req, res, next) {
     console.log(todoData[(todoData.length - 1)]);
     res.send(todoData[(todoData.length - 1)]);
 });
-//editing existing task
-app.put('/rest/todo/:id', function(req, res, next) {
-    var updateTask = req.body;
-    //by default there is no such task with the 'id'
-    var updateResponse = defaultErrorMessage;
-    var updateId = parseInt(req.params.id);
-    for (var i = 0; i < todoData.length; i++) {
-        if (todoData[i].id === updateId) {
-            todoData[i] = updateTask;
-            updateResponse = updateTask;
-            break;
-        }
-    }
-    console.log(updateResponse);
-    res.send(updateResponse); 
-});
-//delete an item from array
-app.delete('/rest/todo/:id', function(req, res, next) {
-    var deleteTaskId = parseInt(req.params.id);
-    for (var i = 0; i < todoData.length; i++) {
-        if (todoData[i].id === deleteTaskId)
-            todoData.splice(i, 1);
-    }
-    console.log(todoData);
-    res.send(todoData); 
-});
 
 //if not found
 app.use(function(req, res) {
