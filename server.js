@@ -77,8 +77,8 @@ app.post('/rest/todo', function(req, res, next) {
     idGenerator = todoData[(todoData.length - 1)].id + 1;
     newTask.id = idGenerator;
     todoData.push(newTask);
-    console.log(todoData);
-    res.send(todoData);
+    console.log(todoData[(todoData.length - 1)]);
+    res.send(todoData[(todoData.length - 1)]);
 });
 
 //if not found
