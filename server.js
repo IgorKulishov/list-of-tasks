@@ -35,6 +35,17 @@ var todoData = [
   }
 ];
 
+    //this data will be sent back if no 'id' found
+    var defaultErrorMessage = {
+    "id":null,
+    "name":"there is no such task",
+    "priority":null,
+    "type":"boolean",
+    "booleanProgress":true,
+    "percentageMessage":0,
+    "isEditing":false
+  };
+
 app.use(bodyParser.json());
 
 //path to html and assigning
@@ -49,16 +60,6 @@ app.get('/rest/todo', function(req, res, next) {
 //respond by 'id'
 app.get('/rest/todo/:id', function(req, res, next) {
     var responseById;
-    //this data will be sent back if no 'id' found
-    var defaultErrorMessage = {
-    "id":null,
-    "name":"there is no such task",
-    "priority":null,
-    "type":"boolean",
-    "booleanProgress":true,
-    "percentageMessage":0,
-    "isEditing":false
-  };
     //by default responseById = defaultErrorMessage
     responseById = defaultErrorMessage;
     var parseRequestedId = parseInt(req.params.id);
@@ -79,6 +80,22 @@ app.post('/rest/todo', function(req, res, next) {
     todoData.push(newTask);
     console.log(todoData[(todoData.length - 1)]);
     res.send(todoData[(todoData.length - 1)]);
+});
+
+app.put('/rest/todo/:id', function(req, res, next) {
+    var updateTask = req.body;
+    //by default there is no such task with the 'id'
+    var updateResponse = defaultErrorMessage;
+    var updateId = parseInt(req.params.id);
+    for (var i = 0; i < todoData.length; i++) {
+        if (todoData[i].id === updateId) {
+            todoData[i] = updateTask;
+            updateResponse = updateTask;
+            break;
+        }
+    }
+    console.log(updateResponse);
+    res.send(updateResponse); 
 });
 
 //if not found
