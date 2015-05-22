@@ -97,9 +97,9 @@ app.put('/rest/todo/:id', function(req, res, next) {
     console.log(updateResponse);
     res.send(updateResponse); 
 });
-
+//delete an item from array
 app.delete('/rest/todo/:id', function(req, res, next) {
-    var deleteTaskId = req.params.id;
+    var deleteTaskId = parseInt(req.params.id);
     for (var i = 0; i < todoData.length; i++) {
         if (todoData[i].id === deleteTaskId)
             todoData.splice(i, 1);
