@@ -3,7 +3,7 @@ var app = express();
 var bodyParser = require('body-parser');
 
 //to assign id to new task;
-var idGenerator = null;    
+var idGenerator = 0;    
 //initial list of tasks
 var todoData = [
   {
@@ -33,7 +33,7 @@ var todoData = [
 ];
 
     //this data will be sent back if no 'id' found
-    var defaultErrorMessage = {
+var defaultErrorMessage = {
     "id":null,
     "name":"there is no such task",
     "priority":null,
@@ -63,14 +63,14 @@ app.get('/rest/todo/:id', function(req, res, next) {
         if (todoData[i].id === parseRequestedId) {
             responseById = todoData[i];
             break;                    
-        } 
+        }
     }
     console.log(responseById);
-    res.send(responseById);    
+    res.send(responseById);
 });
 //adding a new task
 app.post('/rest/todo', function(req, res, next) {
-    var newTask = req.body;    
+    var newTask = req.body;
     idGenerator = todoData[(todoData.length - 1)].id + 1;
     newTask.id = idGenerator;
     todoData.push(newTask);
