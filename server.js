@@ -31,16 +31,15 @@ var todoData = [
     "percentageMessage":0
   }
 ];
-
     //this data will be sent back if no 'id' found
-    var defaultErrorMessage = {
+var defaultErrorMessage = {
     "id":null,
     "name":"there is no such task",
     "priority":null,
     "type":"boolean",
     "booleanProgress":true,
     "percentageMessage":0
-  };
+};
 
 app.use(bodyParser.json());
 
