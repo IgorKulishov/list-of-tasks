@@ -49,7 +49,7 @@ angular.module('listOfTasks', [])
 .factory("jsonService", ['$http', function($http) {
         //array of tasks in service 
         var list = [];
-        $http.get('rest/todo').then(function(response) {
+        $http.get('rest/todo.json').then(function(response) {
             list = response.data;
         });
         //return array to controller and than to "todoListController" in html
