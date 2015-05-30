@@ -31,7 +31,6 @@ var todoData = [
     "percentageMessage":0
   }
 ];
-
     //this data will be sent back if no 'id' found
 var defaultErrorMessage = {
     "id":null,
@@ -40,7 +39,7 @@ var defaultErrorMessage = {
     "type":"boolean",
     "booleanProgress":true,
     "percentageMessage":0
-  };
+};
 
 app.use(bodyParser.json());
 
@@ -77,7 +76,23 @@ app.post('/rest/todo', function(req, res, next) {
     console.log(todoData[(todoData.length - 1)]);
     res.send(todoData[(todoData.length - 1)]);
 });
-
+//editing existing task
+app.put('/rest/todo/:id', function(req, res, next) {
+    var updateTask = req.body;
+    var idOfRequest = req.body.id;
+    //by default there is no such task with the 'id'
+    var updateResponse = defaultErrorMessage;
+    var requestedId = parseInt(req.params.id);
+    for (var i = 0; i < todoData.length; i++) {
+        if (todoData[i].id === requestedId) {
+            todoData[i] = updateTask;
+            updateResponse = updateTask;
+            break;
+        }
+    }
+    console.log(updateResponse);
+    res.send(updateResponse); 
+});
 //if not found
 app.use(function(req, res) {
     res.type('text/plain');
