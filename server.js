@@ -83,14 +83,11 @@ app.put('/rest/todo/:id', function(req, res, next) {
     //by default there is no such task with the 'id'
     var updateResponse = defaultErrorMessage;
     var requestedId = parseInt(req.params.id);
-    //we could void this checking;
-    if (idOfRequest === requestedId) {
-        for (var i = 0; i < todoData.length; i++) {
-            if (todoData[i].id === requestedId) {
-                todoData[i] = updateTask;
-                updateResponse = updateTask;
-                break;
-            }
+    for (var i = 0; i < todoData.length; i++) {
+        if (todoData[i].id === requestedId) {
+            todoData[i] = updateTask;
+            updateResponse = updateTask;
+            break;
         }
     }
     console.log(updateResponse);
