@@ -93,6 +93,16 @@ app.put('/rest/todo/:id', function(req, res, next) {
     console.log(updateResponse);
     res.send(updateResponse); 
 });
+//delete an existing record
+app.delete('/rest/todo/:id', function(req, res, next) {
+    var deleteTaskId = parseInt(req.params.id);
+    for (var i = 0; i < todoData.length; i++) {
+        if (todoData[i].id === deleteTaskId)
+            todoData.splice(i, 1);
+    }
+    console.log("Task with ID = " + deleteTaskId + " is deleted");
+     res.send({"id" : deleteTaskId}); 
+});
 //if not found
 app.use(function(req, res) {
     res.type('text/plain');
