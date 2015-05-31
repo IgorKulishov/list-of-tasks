@@ -1,0 +1,19 @@
+{
+  "name": "todo-list",
+  "version": "0.2.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.2010.io:7999/ps/todo-list.git"
+  },
+  "author": "Project Planning Study",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.12.4",
+    "express": "^4.12.3"
+  }
+}
