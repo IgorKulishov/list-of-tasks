@@ -1,7 +1,6 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
 
 //to assign id to new task;
 var idGenerator = 0;    
@@ -43,11 +42,6 @@ var defaultErrorMessage = {
 };
 
 app.use(bodyParser.json());
-
-mongoose.connect('mongodb://localhost/social', function() {
-    console.log(1);
-});
-module.exports = mangoose;
 
 //path to html and assigning
 app.set('port', process.env.PORT || 3000);
