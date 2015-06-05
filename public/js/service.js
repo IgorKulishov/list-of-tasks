@@ -1,10 +1,12 @@
 function jsonService($http) {
-    $http.get('rest/todo.json').then();
+    $http.get('rest/todo.json').then(function(response) {
+
+    });
     //return array to controller and than to "todoListController" in html
     return {readList: function() {
             }, addNewTask: function(newTask) {
                 
-                                   
+
             }, deleteTask: function(deleteTaskNumber) {
                 
                 
