@@ -1,35 +1,3 @@
-function jsonService($http) {
-    //array of tasks in service 
-    var list = [];
-    $http.get('rest/todo.json').then(function(response) {
-        list = response.data;
-    });
-    //return array to controller and than to "todoListController" in html
-    return {readList: function() {
-            return list;                
-            }, addNewTask: function(newTask) {
-                list.push(newTask);                    
-            }, deleteTask: function(deleteTaskNumber) {
-                for (var i = 0; i < list.length; i++) {
-                    if (list[i].id === deleteTaskNumber)
-                        list.splice(i, 1);
-                }
-            }, editTask: function(editTaskNumber) {
-                for (var i = 0; i < list.length; i++) {
-                    if (list[i].id === editTaskNumber)
-                        list[i].isEditing = true; 
-                }
-            }, saveTask: function(saveTaskNumber) {
-                for (var i = 0; i < list.length; i++) {
-                    if (list[i].id === saveTaskNumber)
-                        list[i].isEditing = false; 
-                }                
-            }, changeProgressInfo: function(changeTaskNumber) {
-                //jreserved function to track clicks
-                
-            }
-    };
-};
 angular.module('listOfTasks', [])
     .controller("todoListController", function(jsonService) {
         var idGenerator = 1;
@@ -48,9 +16,17 @@ angular.module('listOfTasks', [])
         init();
 
         //function to read 'list' array of tasks from service
-        this.taskListArray = function() {
-            return jsonService.readList();
-        }
+        var taskListArrayRead = function() {
+            jsonService.readList().then(function(response) {
+                self.taskListArray = response.data;
+            }, 
+            function(errResponse) {
+                for (var key in errResponse)
+                    alert(' Error while fetching notes ' + errResponse[key]);
+                }
+            );
+        };
+        taskListArrayRead();
 
         //function to add new Task 
         this.addTask = function(taskToAdd) {            
