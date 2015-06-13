@@ -9,7 +9,7 @@ angular.module('serviceHtml', [])
                             deferred.resolve(data);
                             //$q.when(data);
                         } else {
-                            deferred.reject($q.reject(data));
+                            deferred.reject(data);
                         }
                         return deferred.promise;
                     }, function(err) {console.log(err)}
