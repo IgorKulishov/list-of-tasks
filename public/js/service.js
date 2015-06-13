@@ -3,10 +3,11 @@ angular.module('serviceHtml', [])
         //return array to controller and than to "todoListController" in html
         return {readList: function() {
                     var deferred = $q.defer();
-                    return $http.get('/rest/todo').then(function(data) {                        
+                    return $http.get('/rest/todo').then(function(data) {
                         deferred.notify('delivered');
                         if (data) {
-                            deferred.resolve(data);                        
+                            deferred.resolve(data);
+                            //$q.when(data);
                         } else {
                             deferred.reject($q.reject(data));
                         }

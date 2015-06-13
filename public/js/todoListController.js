@@ -1,5 +1,5 @@
 angular.module('listOfTasks', ['serviceHtml'])
-    .controller("todoListController", function(jsonService, $q) {
+    .controller("todoListController", ['jsonService', function(jsonService) {
         var idGenerator = 1;
         //this.taskListArray = [];  <-moved array of tasks to service
         // presentation objects stay in the controller
@@ -56,4 +56,4 @@ angular.module('listOfTasks', ['serviceHtml'])
         this.booleanCheck = function(id) {
             return jsonService.changeProgressInfo(id);
         };
-});
+}]);
