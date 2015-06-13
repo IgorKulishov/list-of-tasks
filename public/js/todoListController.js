@@ -1,5 +1,5 @@
-angular.module('listOfTasks', [])
-    .controller("todoListController", function(jsonService) {
+angular.module('listOfTasks', ['serviceHtml'])
+    .controller("todoListController", function(jsonService, $q) {
         var idGenerator = 1;
         //this.taskListArray = [];  <-moved array of tasks to service
         // presentation objects stay in the controller
@@ -17,33 +17,36 @@ angular.module('listOfTasks', [])
 
         //function to read 'list' array of tasks from service
         var taskListArrayRead = function() {
-            jsonService.readList().then(function(response) {
-                self.taskListArray = response.data;
-            }, 
-            function(errResponse) {
-                for (var key in errResponse)
-                    alert(' Error while fetching notes ' + errResponse[key]);
+                jsonService.readList().then(function(response) {
+                    self.taskListArray = response.data;
+                },
+                function(errResponse) {
+                    alert(' Error while fetching notes ' + errResponse);
                 }
             );
         };
         taskListArrayRead();
 
         //function to add new Task 
-        this.addTask = function(taskToAdd) {            
-            jsonService.addNewTask({                
+        this.addTask = function(taskToAdd) {
+            jsonService.addNewTask({
                 id: idGenerator++, name: taskToAdd.name, priority: taskToAdd.priority, 
                 type: taskToAdd.type, percentageMessage: taskToAdd.percentageMessage,
                 isEditing: taskToAdd.isEditing
-            });            
-            init();        
+            });
+            init();
+        };
+        self.status = {
+            isFirstOpen: true,
+            isFirstDisabled: false
         };
         //function to delete a task
-        this.delete = function(id) {                    
+        this.delete = function(id) {
             return jsonService.deleteTask(id);
         };
         //this function is to edit a Task
-        this.edit = function(id) {            
-            return jsonService.editTask(id);            
+        this.edit = function(id) {
+            return jsonService.editTask(id);
         };
         //this function is to Save edited Task
         this.save = function(id) {
@@ -53,5 +56,4 @@ angular.module('listOfTasks', [])
         this.booleanCheck = function(id) {
             return jsonService.changeProgressInfo(id);
         };
-})
-.service("jsonService", ['$http', jsonService]);
+});

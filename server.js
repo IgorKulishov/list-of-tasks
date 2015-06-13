@@ -16,7 +16,7 @@ var todoData = [
   },
   {
     "id":2,
-    "name":"Task 2",
+    "name":"Task two",
     "priority":1,
     "type":"boolean",
     "booleanProgress":true,
