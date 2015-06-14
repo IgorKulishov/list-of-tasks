@@ -17,8 +17,8 @@ angular.module('listOfTasks', ['serviceHtml'])
 
         //function to read 'list' array of tasks from service
         var taskListArrayRead = function() {
-                jsonService.readList().then(function(response) {
-                    self.taskListArray = response.data;
+                jsonService.readList().then(function(data) {
+                    self.taskListArray = data;
                 },
                 function(errResponse) {
                     alert(' Error while fetching notes ' + errResponse);
