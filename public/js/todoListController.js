@@ -20,9 +20,8 @@ angular.module('listOfTasks', ['serviceHtml'])
                 jsonService.readList().then(function(data) {
                     self.taskListArray = data;
                 },
-                function(errResponse) {
-                    alert(' Error while fetching notes ');
-                }
+                function(errResponse) {                    
+                    alert(' Error while fetching, status : ' + errResponse.status);                }
             );
         };
         taskListArrayRead();
