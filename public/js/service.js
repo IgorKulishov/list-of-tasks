@@ -8,14 +8,9 @@ angular.module('serviceHtml', [])
                     function(response) {
                         deferred.resolve(response.data);
                         return deferred.promise;
-                /*    },
-                    function(error) {
-                        deferred.reject(response.data);
-                        return deferred.promise; */
-                    } 
-                );
-                  
-            }, 
+                    }
+                );                  
+            },
             addNewTask: function(newTask) {
                                  
             }, 
