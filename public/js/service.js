@@ -1,15 +1,25 @@
-angular.module('serviceHtml', [])
-    .service("jsonService", ['$http', '$q', function ($http, $q) {
+angular.module('listOfTasks')
+    .service('dataService', ['$http', '$q', function ($http, $q) {
         //return array to controller and than to "todoListController" in html
         return {
             readList: function() {
-                var deferred = $q.defer();
-                return $http.get('/rest/todo').then(
+                
+                // A. Deferred API 4ms
+                /*var deferred = $q.defer();
+                $http.get('/rest/todo').then(
                     function(response) {
-                        deferred.resolve(response.data);
-                        return deferred.promise;
+                        deferred.resolve(response.data);        
                     }
-                );                  
+                );
+                return deferred.promise;*/
+                // B. Promise API 2ms
+                return $q(function(resolve, reject) {
+                    $http.get('/rest/todo').then(
+                        function(response) {
+                            resolve(response.data);        
+                        }
+                    );
+                });
             },
             addNewTask: function(newTask) {
                                  

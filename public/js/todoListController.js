@@ -1,5 +1,5 @@
-angular.module('listOfTasks', ['serviceHtml'])
-    .controller("todoListController", ['jsonService', function(jsonService) {
+angular.module('listOfTasks', [])
+    .controller("todoListController", ['dataService', function(dataService) {
         var idGenerator = 1;
         //this.taskListArray = [];  <-moved array of tasks to service
         // presentation objects stay in the controller
@@ -17,7 +17,7 @@ angular.module('listOfTasks', ['serviceHtml'])
 
         //function to read 'list' array of tasks from service
         var taskListArrayRead = function() {
-                jsonService.readList().then(function(data) {
+                dataService.readList().then(function(data) {
                     self.taskListArray = data;
                 },
                 function(errResponse) {                    
@@ -28,7 +28,7 @@ angular.module('listOfTasks', ['serviceHtml'])
 
         //function to add new Task 
         this.addTask = function(taskToAdd) {
-            jsonService.addNewTask({
+            dataService.addNewTask({
                 id: idGenerator++, name: taskToAdd.name, priority: taskToAdd.priority, 
                 type: taskToAdd.type, percentageMessage: taskToAdd.percentageMessage,
                 isEditing: taskToAdd.isEditing
@@ -37,18 +37,18 @@ angular.module('listOfTasks', ['serviceHtml'])
         };
         //function to delete a task
         this.delete = function(id) {
-            return jsonService.deleteTask(id);
+            return dataService.deleteTask(id);
         };
         //this function is to edit a Task
         this.edit = function(id) {
-            return jsonService.editTask(id);
+            return dataService.editTask(id);
         };
         //this function is to Save edited Task
         this.save = function(id) {
-            return jsonService.saveTask(id);
+            return dataService.saveTask(id);
         };
         //to indicate Progress of a Boolean in a Task when clicked [v] button in user's menu to change Progress of a Task            
         this.booleanCheck = function(id) {
-            return jsonService.changeProgressInfo(id);
+            return dataService.changeProgressInfo(id);
         };
 }]);
