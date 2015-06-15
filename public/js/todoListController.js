@@ -21,7 +21,7 @@ angular.module('listOfTasks', ['serviceHtml'])
                     self.taskListArray = data;
                 },
                 function(errResponse) {
-                    alert(' Error while fetching notes ' + errResponse);
+                    alert(' Error while fetching notes ');
                 }
             );
         };
@@ -35,10 +35,6 @@ angular.module('listOfTasks', ['serviceHtml'])
                 isEditing: taskToAdd.isEditing
             });
             init();
-        };
-        self.status = {
-            isFirstOpen: true,
-            isFirstDisabled: false
         };
         //function to delete a task
         this.delete = function(id) {

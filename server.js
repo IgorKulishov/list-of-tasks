@@ -49,6 +49,7 @@ app.use(express.static(__dirname + '/public'));
 
 //get respond sends list of all tasks to a client
 app.get('/rest/todo', function(req, res, next) {
+    res.status(200);
     console.log(todoData);
     res.send(todoData);            
 });
