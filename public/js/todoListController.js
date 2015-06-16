@@ -1,5 +1,5 @@
 angular.module('listOfTasks', [])
-    .controller("todoListController", function(jsonService) {
+    .controller("todoListController", ['dataService', function(dataService) {
         var idGenerator = 1;
         //this.taskListArray = [];  <-moved array of tasks to service
         // presentation objects stay in the controller
@@ -16,65 +16,39 @@ angular.module('listOfTasks', [])
         init();
 
         //function to read 'list' array of tasks from service
-        this.taskListArray = function() {
-            return jsonService.readList();
-        }
+        var taskListArrayRead = function() {
+                dataService.readList().then(function(data) {
+                    self.taskListArray = data;
+                },
+                function(errResponse) {                    
+                    alert(' Error while fetching, status : ' + errResponse.status);                }
+            );
+        };
+        taskListArrayRead();
 
         //function to add new Task 
-        this.addTask = function(taskToAdd) {            
-            jsonService.addNewTask({                
+        this.addTask = function(taskToAdd) {
+            dataService.addNewTask({
                 id: idGenerator++, name: taskToAdd.name, priority: taskToAdd.priority, 
                 type: taskToAdd.type, percentageMessage: taskToAdd.percentageMessage,
                 isEditing: taskToAdd.isEditing
-            });            
-            init();        
+            });
+            init();
         };
         //function to delete a task
-        this.delete = function(id) {                    
-            return jsonService.deleteTask(id);
+        this.delete = function(id) {
+            return dataService.deleteTask(id);
         };
         //this function is to edit a Task
-        this.edit = function(id) {            
-            return jsonService.editTask(id);            
+        this.edit = function(id) {
+            return dataService.editTask(id);
         };
         //this function is to Save edited Task
         this.save = function(id) {
-            return jsonService.saveTask(id);
+            return dataService.saveTask(id);
         };
         //to indicate Progress of a Boolean in a Task when clicked [v] button in user's menu to change Progress of a Task            
         this.booleanCheck = function(id) {
-            return jsonService.changeProgressInfo(id);
-        };
-})
-.factory("jsonService", ['$http', function($http) {
-        //array of tasks in service 
-        var list = [];
-        $http.get('rest/todo.json').then(function(response) {
-            list = response.data;
-        });
-        //return array to controller and than to "todoListController" in html
-        return {readList: function() {
-                return list;                
-                }, addNewTask: function(newTask) {
-                    list.push(newTask);                    
-                }, deleteTask: function(deleteTaskNumber) {
-                    for (var i = 0; i < list.length; i++) {
-                        if (list[i].id === deleteTaskNumber)
-                            list.splice(i, 1);
-                    }
-                }, editTask: function(editTaskNumber) {
-                    for (var i = 0; i < list.length; i++) {
-                        if (list[i].id === editTaskNumber)
-                            list[i].isEditing = true; 
-                    }
-                }, saveTask: function(saveTaskNumber) {
-                    for (var i = 0; i < list.length; i++) {
-                        if (list[i].id === saveTaskNumber)
-                            list[i].isEditing = false; 
-                    }                
-                }, changeProgressInfo: function(changeTaskNumber) {
-                    //jreserved function to track clicks
-                    
-                }
+            return dataService.changeProgressInfo(id);
         };
 }]);

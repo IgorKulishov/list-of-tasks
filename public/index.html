@@ -8,6 +8,7 @@
 	    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 	    <script src="vendor/angular.js"></script>
 	    <script src="js/todoListController.js"></script>
+	    <script src="js/service.js"></script>
 	    <title>List of tasks</title>
     </head>
     <body ng-controller="todoListController as ctrl">
@@ -42,7 +43,7 @@
 	            </div>
 
 	        </div>
-	        <div class="row" ng-repeat="taskRecord in ctrl.taskListArray()">
+	        <div class="row" ng-repeat="taskRecord in ctrl.taskListArray">
 	            
 	            <div class="col-md-1 col1">
 	                <h4>{{$index + 1}}</h4>
