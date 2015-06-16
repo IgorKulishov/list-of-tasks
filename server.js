@@ -61,7 +61,7 @@ app.get('/rest/todo/:id', function(req, res, next) {
     for (var i = 0; i < todoData.length; i++) {
         if (todoData[i].id === parseRequestedId) {
             responseById = todoData[i];
-            break;                    
+            break;
         }
     }
     console.log(responseById);

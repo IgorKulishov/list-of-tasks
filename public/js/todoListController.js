@@ -1,11 +1,11 @@
 angular.module('listOfTasks', [])
-    .controller("todoListController", ['dataService', function(dataService) {
-        var idGenerator = 1;
+    .controller("todoListController", ['dataService', '$window', '$location', function(dataService, $window, $location) {
+        
         //this.taskListArray = [];  <-moved array of tasks to service
         // presentation objects stay in the controller
         var self = this;        
         var init = function() {
-            self.newTask = {};
+             self.newTask = {};
             self.newTask.name = "";
             self.newTask.priority = 1;
             self.newTask.type = "boolean";
@@ -20,8 +20,9 @@ angular.module('listOfTasks', [])
                 dataService.readList().then(function(data) {
                     self.taskListArray = data;
                 },
-                function(errResponse) {                    
-                    alert(' Error while fetching, status : ' + errResponse.status);                }
+                function(errResponse) {
+                    alert(' Error while fetching, status : ' + errResponse.status);
+                }
             );
         };
         taskListArrayRead();
@@ -29,15 +30,22 @@ angular.module('listOfTasks', [])
         //function to add new Task 
         this.addTask = function(taskToAdd) {
             dataService.addNewTask({
-                id: idGenerator++, name: taskToAdd.name, priority: taskToAdd.priority, 
-                type: taskToAdd.type, percentageMessage: taskToAdd.percentageMessage,
-                isEditing: taskToAdd.isEditing
-            });
-            init();
+                name: taskToAdd.name, 
+                priority: taskToAdd.priority,
+                type: taskToAdd.type,
+                percentageMessage: taskToAdd.percentageMessage
+            }).then(function(data) {
+                    $window.alert('Added task ' + data.name + ' with ID# ' + data.id);
+                    $window.location.reload();
+                },
+                function(errResponse) {
+                    $window.alert('Error while fetching: ' + errResponse.status);
+                }
+            );            
         };
         //function to delete a task
         this.delete = function(id) {
-            return dataService.deleteTask(id);
+            dataService.deleteTask(id);
         };
         //this function is to edit a Task
         this.edit = function(id) {
