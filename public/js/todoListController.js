@@ -41,7 +41,7 @@ angular.module('listOfTasks', [])
                 function(errResponse) {
                     $window.alert('Error while fetching: ' + errResponse.status);
                 }
-            );            
+            );
         };
         //function to delete a task
         this.delete = function(id) {
