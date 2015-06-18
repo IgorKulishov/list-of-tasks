@@ -1,5 +1,5 @@
 angular.module('listOfTasks', [])
-    .controller("todoListController", ['dataService', '$window', '$location', function(dataService, $window, $location) {
+    .controller("todoListController", ['dataService', '$window', '$location', function(dataService, $location) {
         
         //this.taskListArray = [];  <-moved array of tasks to service
         // presentation objects stay in the controller
@@ -35,7 +35,7 @@ angular.module('listOfTasks', [])
                 type: taskToAdd.type,
                 percentageMessage: taskToAdd.percentageMessage
             }).then(function(data) {
-                    $window.alert('Added task ' + data.name + ' with ID# ' + data.id);
+                    console.log('Added task ' + data.name + ' with ID# ' + data.id);
                     $window.location.reload();
                 },
                 function(errResponse) {
