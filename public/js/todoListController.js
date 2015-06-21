@@ -1,5 +1,5 @@
 angular.module('listOfTasks', [])
-    .controller("todoListController", ['dataService', '$window', '$location', function(dataService, $location) {
+    .controller("todoListController", ['dataService', function(dataService) {
         
         //this.taskListArray = [];  <-moved array of tasks to service
         // presentation objects stay in the controller
@@ -36,10 +36,10 @@ angular.module('listOfTasks', [])
                 percentageMessage: taskToAdd.percentageMessage
             }).then(function(data) {
                     console.log('Added task ' + data.name + ' with ID# ' + data.id);
-                    $window.location.reload();
+                    taskListArrayRead();
                 },
                 function(errResponse) {
-                    $window.alert('Error while fetching: ' + errResponse.status);
+                    console.log('Error while fetching: ' + errResponse.status);
                 }
             );
         };
