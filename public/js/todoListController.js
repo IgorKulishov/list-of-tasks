@@ -1,5 +1,5 @@
 angular.module('listOfTasks', [])
-    .controller("todoListController", ['dataService', '$window', '$location', function(dataService, $location) {
+    .controller("todoListController", ['dataService', function(dataService) {
         
         //this.taskListArray = [];  <-moved array of tasks to service
         // presentation objects stay in the controller
@@ -34,18 +34,22 @@ angular.module('listOfTasks', [])
                 priority: taskToAdd.priority,
                 type: taskToAdd.type,
                 percentageMessage: taskToAdd.percentageMessage
-            }).then(function(data) {
-                    console.log('Added task ' + data.name + ' with ID# ' + data.id);
-                    $window.location.reload();
+            }).then(function(data) {                    
+                    taskListArrayRead();
                 },
                 function(errResponse) {
-                    $window.alert('Error while fetching: ' + errResponse.status);
+                    console.log('Error while fetching: ' + errResponse.status);
                 }
             );
         };
         //function to delete a task
         this.delete = function(id) {
-            dataService.deleteTask(id);
+            dataService.deleteTask(id).then(function(data) {
+                taskListArrayRead();
+            },
+            function(err) {
+                console.log(err);
+            });
         };
         //this function is to edit a Task
         this.edit = function(id) {

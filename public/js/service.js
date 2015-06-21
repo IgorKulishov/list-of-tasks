@@ -21,7 +21,13 @@ angular.module('listOfTasks')
                 });
             }, 
             deleteTask: function(deleteTaskNumber) {
-                $http('/rest/todo/' + deleteTaskNumber);
+                return $q(function(resolve, reject) {
+                    $http.delete('/rest/todo/' + deleteTaskNumber).then(
+                        function(response) {
+                            resolve(response.data);
+                        }
+                    );
+                });                    
             }, 
             editTask: function(editTaskNumber) {
                 
