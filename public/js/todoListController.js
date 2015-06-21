@@ -35,7 +35,6 @@ angular.module('listOfTasks', [])
                 type: taskToAdd.type,
                 percentageMessage: taskToAdd.percentageMessage
             }).then(function(data) {
-                    console.log('Added task ' + data.name + ' with ID# ' + data.id);
                     taskListArrayRead();
                 },
                 function(errResponse) {
