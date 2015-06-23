@@ -35,7 +35,7 @@ angular.module('listOfTasks', [])
                 type: taskToAdd.type,
                 percentageMessage: taskToAdd.percentageMessage
             }).then(function(data) {
-                    taskListArrayRead();
+                    self.taskListArray.push(data);
                 },
                 function(errResponse) {
                     console.log('Error while fetching: ' + errResponse.status);
