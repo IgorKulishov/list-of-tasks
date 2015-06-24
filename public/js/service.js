@@ -3,29 +3,25 @@ angular.module('listOfTasks')
         //return array to controller and than to "todoListController" in html
         return {
             readList: function() {
-                
-                // A. Deferred API 4ms
-                /*var deferred = $q.defer();
-                $http.get('/rest/todo').then(
-                    function(response) {
-                        deferred.resolve(response.data);        
-                    }
-                );
-                return deferred.promise;*/
-                // B. Promise API 2ms
                 return $q(function(resolve, reject) {
                     $http.get('/rest/todo').then(
                         function(response) {
-                            resolve(response.data);        
+                            resolve(response.data);
                         }
                     );
                 });
             },
             addNewTask: function(newTask) {
-                                 
+                return $q(function(resolve, reject) {
+                    $http.post('/rest/todo', newTask).then(
+                        function(response) {
+                            resolve(response.data);
+                        }
+                    );
+                });
             }, 
             deleteTask: function(deleteTaskNumber) {
-                
+                $http('/rest/todo/' + deleteTaskNumber);
             }, 
             editTask: function(editTaskNumber) {
                 
