@@ -57,13 +57,15 @@ angular.module('listOfTasks', [])
                 console.log(err);
             });
         };
-        //this function is to edit a Task
-        this.edit = function(id) {
-            return dataService.editTask(id);
-        };
         //this function is to Save edited Task
         this.save = function(id) {
-            return dataService.saveTask(id);
+            var taskArray = self.taskListArray;
+            var taskToSave;
+            for (var i = 0; i < taskArray.length; i++) {
+                if (taskArray[i].id === id)
+                    taskToSave = taskArray[i];
+            }
+            return dataService.saveTask(id, taskToSave);
         };
         //to indicate Progress of a Boolean in a Task when clicked [v] button in user's menu to change Progress of a Task            
         this.booleanCheck = function(id) {

@@ -32,8 +32,8 @@ angular.module('listOfTasks')
             editTask: function(editTaskNumber) {
                 
             }, 
-            saveTask: function(saveTaskNumber) {
-                
+            saveTask: function(saveTaskNumber, saveTaskInfo) {
+                $http.put('/rest/todo/' + saveTaskNumber, saveTaskInfo);
             }
         };
     }]);
