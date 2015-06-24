@@ -27,13 +27,13 @@ angular.module('listOfTasks')
                             resolve(response.data);
                         }
                     );
-                });                    
-            }, 
+                });
+            },
             editTask: function(editTaskNumber) {
                 
             }, 
             saveTask: function(saveTaskNumber) {
-                                
+                
             }
         };
     }]);

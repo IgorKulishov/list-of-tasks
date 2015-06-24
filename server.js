@@ -101,7 +101,7 @@ app.delete('/rest/todo/:id', function(req, res, next) {
             todoData.splice(i, 1);
     }
     console.log("Task with ID = " + deleteTaskId + " is deleted");
-     res.send({"id" : deleteTaskId}); 
+    res.send({"id" : deleteTaskId}); 
 });
 //if not found
 app.use(function(req, res) {

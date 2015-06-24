@@ -45,7 +45,13 @@ angular.module('listOfTasks', [])
         //function to delete a task
         this.delete = function(id) {
             dataService.deleteTask(id).then(function(data) {
-                taskListArrayRead();
+                var taskArray = self.taskListArray;
+                var N;
+                for (var i = 0; i < taskArray.length; i++) {
+                    if (taskArray[i].id === data.id)
+                        N = i;                        
+                }
+                self.taskListArray.splice(N, 1);
             },
             function(err) {
                 console.log(err);
